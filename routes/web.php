@@ -22,3 +22,4 @@ Route::get('/add', function () {
 Route::get('/list', function () {
     return view('list');
 });
+Route::resource('contracts', \App\Http\Controllers\ContractController::class);
