@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('lists', function (Blueprint $table) {
+        Schema::create('logs', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('contract');
-            $table->double('loan');
-            $table->double('payment');
-            $table->date('due_date');
-            $table->integer('status');
-
+            $table->string('model_name')->nullable();
+            $table->integer('object_id')->nullable();
+            $table->string('action_name')->nullable();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('lists');
+        Schema::dropIfExists('logs');
     }
 };
