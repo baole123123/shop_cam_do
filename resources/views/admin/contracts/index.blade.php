@@ -7,7 +7,8 @@
 
 <!-- Product List Table -->
 <div class="card">
-    
+    <!-- Alert -->
+    @include('admin.includes.global.alert')
     <!-- Form search -->
     <form action="" method="get">
         <div class="card-header">
