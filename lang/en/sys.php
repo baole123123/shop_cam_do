@@ -7,4 +7,5 @@ return [
     'destroy_item_success' => 'Xóa thành công',
     'destroy_item_error' => 'Xóa không thành công',
     'item_not_found' => 'Không tìm thấy kết quả phù hợp',
+    'add_new' => 'Thêm mới',
 ];
