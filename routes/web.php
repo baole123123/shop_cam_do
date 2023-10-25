@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,8 +22,6 @@ Route::get('/add', function () {
 Route::get('/list', function () {
     return view('list');
 });
-// Route::get('/customer', [CustomerController::class, 'index'])->name('admin.index');
-// Route::get('/customer', [CustomerController::class, 'index'])->name('admin.index');
-// Route::get('/customer', [CustomerController::class, 'index'])->name('admin.index');
-Route::resource('customers', CustomerController::class);
 
+Route::resource('customers', \App\Http\Controllers\CustomerController::class);
+Route::resource('contracts', \App\Http\Controllers\ContractController::class);
