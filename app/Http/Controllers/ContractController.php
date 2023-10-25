@@ -32,7 +32,7 @@ class ContractController extends Controller
     public function create()
     {
         $params = [
-            
+
         ];
         return view("admin.contracts.create", $params);
     }

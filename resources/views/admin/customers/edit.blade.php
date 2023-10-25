@@ -1,62 +1,65 @@
 @extends('admin.layouts.master')
-
-
 @section('content')
-
-<!DOCTYPE html>
-<html>
-<body>
-    <h2>Sửa chi tiêu</h2>
-    <form action="<?php echo route('customers.update', $customers->id) ?>" method="POST" enctype="multipart/form-data">
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="py-3 mb-4">
+        <span class="text-muted fw-light">Chỉnh sửa /</span><span> Khách Hàng</span>
+    </h4>
+    <form action="{{route('customers.update' , $item->id)}}" method="POST">
         @csrf
         @method('PUT')
-        <label for="name">Tên:</label>
-        <br>
-        <input type="text" id="name" name="name" value="{{$customers->name}}">
-        <br>
-        <label for="email">Email:</label>
-        <br>
-        <input type="text" id="email" name="email" value="{{$customers->email}}">
-        <br>
-        <label for="phone">SDT:</label>
-        <br>
-        <input type="text" id="phone" name="phone" value="{{$customers->phone}}">
-        <br>
-        <label for="address">Địa chỉ:</label>
-        <br>
-        <input type="text" id="address" name="address" value="{{$customers->address}}">
-        <br></br>
+        <div class="app-ecommerce">
+            <!-- Add Product -->
+            <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+                <div class="d-flex flex-column justify-content-center">
 
-        <label for="birthday">Ngày sinh:</label>
-        <br>
-        <input type="date" id="birthday" name="birthday" value="{{$customers->birthday}}">
-        <br></br>
-        <label for="identification">CCCD:</label>
-        <br>
-        <input type="text" id="identification" name="identification" value="{{$customers->identification}}">
-        <br></br>
-        <label for="id_image_front">Ảnh mặt trước:</label>
-        <br>
-        <input type="file" id="id_image_front" name="id_image_front" value="{{$customers->id_image_front}}">
-        <br></br>
-        <label for="id_image_back">Ảnh mặt sau:</label>
-        <br>
-        <input type="file" id="id_image_back" name="id_image_back" value="{{$customers->id_image_back}}">
-        <br></br>
+                </div>
+                <div class="d-flex align-content-center flex-wrap gap-3">
+                    <a href="{{route('customers.index')}}" class="btn btn-label-secondary">Trở Về</a>
+                    <button type="submit" class="btn btn-primary">Lưu</button>
 
-        <label for="image_user">Ảnh chân dung:</label>
-        <br>
-        <input type="file" id="image_user" name="image_user" value="{{$customers->image_user}}">
-        <br></br>
+                </div>
 
-        <label for="status">Trạng thái:</label>
-        <br>
-        <input type="text" id="status" name="status" value="{{$customers->status}}">
-        <br></br>
-  <a href="{{ route('customers.index') }}" class="btn">Hủy</a>
+            </div>
 
-        <input type="submit" value="Cập nhật">
+            <div class="row">
+                <!-- First column-->
+                <div class="col-12 col-lg-12">
+                    <!-- Product Information -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="card-tile mb-0">Thông tin Khách Hàng</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label class="form-label" for="ecommerce-customer-name">Tên</label>
+                                <input type="text" class="form-control" placeholder="Tên" name="name" value="{{ $item->name }}">
+                                @error('name') <div class="alert alert-danger">{{ $message }}</div> @enderror
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col"><label class="form-label" for="ecommerce-customer-email">Email</label>
+                                    <input type="text" class="form-control" placeholder="Email" name="email" value="{{ $item->email }}">
+                                    @error('email') <div class="alert alert-danger">{{ $message }}</div> @enderror
+                                </div>
+                                <div class="col"><label class="form-label" for="ecommerce-customer-phone">Số Điện Thoại</label>
+                                    <input type="text" class="form-control" placeholder="0123-4567" name="phone" value="{{ $item->phone }}">
+                                    @error('phone') <div class="alert alert-danger">{{ $message }}</div> @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="ecommerce-customer-address">Địa chỉ</label>
+                                    <input type="text" class="form-control" placeholder="Địa Chỉ" name="address" value="{{ $item->address }}">
+                                    @error('address') <div class="alert alert-danger">{{ $message }}</div> @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="ecommerce-customer-address">Trạng thái</label>
+                                    <input type="text" class="form-control" placeholder="Trạng Thái" name="status" value="{{ $item->status }}" style="width: 630px;">
+                                    @error('status') <div class="alert alert-danger">{{ $message }}</div> @enderror
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </form>
-</body>
-</html>
+</div>
 @endsection

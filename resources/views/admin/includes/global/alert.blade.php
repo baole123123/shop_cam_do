@@ -3,7 +3,6 @@
     @if (session('success'))
         <div class="alert alert-success" role="alert">
             {{ session('success') }}
-            Hello
         </div>
     @endif
     @if (session('error'))

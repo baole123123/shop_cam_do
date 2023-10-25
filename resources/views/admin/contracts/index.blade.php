@@ -1,6 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('content')
+
 <h4 class="py-3 mb-4">
     <span class="text-muted fw-light">Trang chủ /</span> Cầm Đồ
 </h4>

@@ -3,182 +3,153 @@
 
 @section('content')
 
-<form action="{{ route('customers.index') }}" method="GET">
-    <input type="text" name="keyword" placeholder="Nhập...">
-    <button type="submit">Search</button> <br> <br>
-
-    <a href="{{ route('customers.create') }}" class="btn btn-add">Thêm mới</a>
-    <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-        <h6 class="text-white text-capitalize ps-3">Danh sách khách hàng</h6>
-    </div>
-
-    <div class="table-responsive p-0">
-        <table>
-            <tr>
-                <th>TT</th>
-                <th>Tên</th>
-                <th>Email</th>
-                <th>Số Điện Thoại</th>
-                <th>Địa chỉ</th>
-                <th>Ngày sinh</th>
-                <th>CCCD</th>
-                <th>Ảnh mặt trước</th>
-                <th>Ảnh mặt sau</th>
-                <th>Ảnh chân dung</th>
-                <th>Trạng thái</th>
-                <th>Thao tác</th>
-            </tr>
-            @foreach ($customers as $key => $customer)
-            <tr>
-                <td> {{ $key + 1 }}</td>
-                <td>{{ $customer->name}}</td>
-                <td>{{ $customer->email }}</td>
-                <td>{{ $customer->phone }}</td>
-                <td>{{ $customer->address }}</td>
-                <td>{{ $customer->birthday }}</td>
-                <td><img width="90px" height="90px" src="{{ asset($customer->identification) }}" alt=""></td>
-                <td><img width="90px" height="90px" src="{{ asset($customer->id_image_front) }}" alt=""></td>
-                <td><img width="90px" height="90px" src="{{ asset($customer->id_image_back) }}" alt=""></td>
-                <td><img width="90px" height="90px" src="{{ asset($customer->image_user) }}" alt=""></td>
-                <td>{{ $customer->status }}</td>
 
 
+<h4 class="py-3 mb-4">
+    <span class="text-muted fw-light">Trang chủ /</span> Khách Hàng
+</h4>
 
-                <!-- <td><img width="90px" height="90px" src="{{ asset($customer->image) }}" alt=""></td> -->
+<!-- Product List Table -->
+<div class="card">
+    <div class="card-body">
 
-                <td>
-                <div class="btn-group">
-                        <a href="{{ route('customers.edit',$customer->id) }}">
-                            <button type="button" class="btn btn-primary">Sửa</button>
-                        </a>
-                        <a href="{{ route('customers.show',$customer->id) }}">
-                            <button type="button" class="btn btn-success mb-2">Xem</button>
-                        </a>
-                        <form method="POST" action="{{ route('customers.destroy',$customer->id) }}">
-                            @method('DELETE')
-                            @csrf
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có muốn xóa ?')">Xóa</button>
+        <!-- Alert -->
+        @include('admin.includes.global.alert')
 
-
-                        </form>
-
-
+        <!-- Form search -->
+        <form action="{{ route('customers.index') }}" method="get">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col">
+                        <select id="ProductStatus" class="form-select text-capitalize">
+                            <option value="">Tất cả</option>
+                            <option value="dang_vay">Đang vay</option>
+                            <option value="du_lai">Đủ lãi</option>
+                            <option value="no">Nợ</option>
+                            <option value="qua_han">Quá hạn</option>
+                        </select>
                     </div>
-                </td>
+                    <div class="col">
+                        <select id="ProductStatus" class="form-select text-capitalize">
+                            <option value="">Tất cả</option>
+                            <option value="dang_vay">Đang vay</option>
+                            <option value="du_lai">Đủ lãi</option>
+                            <option value="no">Nợ</option>
+                            <option value="qua_han">Quá hạn</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <select id="ProductStatus" class="form-select text-capitalize">
+                            <option value="">Thời gian</option>
+                            <option value="dang_vay">Đang vay</option>
+                            <option value="du_lai">Đủ lãi</option>
+                            <option value="no">Nợ</option>
+                            <option value="qua_han">Quá hạn</option>
+                        </select>
+                    </div>
+                    <div class="col-md-1">
+                        <button class="btn btn-primary">
+                            <i class="bx bx-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-header border-top">
+                <div class="row">
+                    <div class="col-md-6">
+                        <input type="text" name="s" class="form-control" placeholder="Tên, sdt khách hàng">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col">
+                                <select id="limit" class="form-select text-capitalize">
+                                    <option value="10">10</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-label-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bx bx-export me-1"></i> Export
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a class="dropdown-item disabled" href="#">Export</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <a href="{{ route('customers.create') }}" class="btn btn-primary">
+                                    <i class="bx bx-plus"></i> @lang('sys.add_new')
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
 
-            </tr>
-            @endforeach
-        </table>
+        <!-- Table -->
+        <div class="card-body">
+            <div class="table-responsive text-nowrap ">
+                <table class="table border-top">
+                    <thead>
+                        <tr>
+                            <th>TT</th>
+                            <th>Tên</th>
+                            <th>Số Điện Thoại</th>
+                            <th>Địa chỉ</th>
+                            <th>Trạng thái</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                        @foreach( $items as $key => $customer )
+                        <tr>
+                            <td>{{ $key + 1 }}</td>
+                            <td>
+                                <div class="d-flex">
+                                    <div class="avatar me-1">
+                                        <img src="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/assets/img/ecommerce-images/product-9.png" class="rounded-2">
+                                    </div>
+                                    <div class="td-info">
+                                        <h6 class="text-body mb-0">{{ $customer->name}}</h6>
+                                        <small class="text-muted text-truncate d-none d-sm-block">{{$customer->email}}</small>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>{{ $customer->phone }}</td>
+                            <td>{{ $customer->address }}</td>
+                            <td>{{ $customer->status }}</td>
+                            <td>
+                                <div class="dropdown">
+                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>
+                                    <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="{{route('customers.edit' , $customer->id)}}"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                        </form>
+
+                                        <a class="dropdown-item" href="{{route('customers.show' , $customer->id)}}"><i class="bx bx-show me-1"></i> Show</a>
+                                        <form method="POST" action="{{route('customers.destroy' ,$customer->id)}}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="dropdown-item"><i class="bx bx-trash me-1"></i> Delete</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="card-footer pt-1 pb-1">
+            <div class="float-end">
+                {{ $items->appends(request()->query())->links() }}
+            </div>
+        </div>
+
     </div>
-
-
-
-    <div class="card-footer">
-        <nav class="float-right">
-            {{ $customers->appends(request()->query())->links('pagination::bootstrap-4') }}
-        </nav>
-    </div>
-
     @endsection
-    <style>
-    /* CSS cho bảng */
-    table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-    th,
-    td {
-        border: 1px solid #ddd;
-        padding: 8px;
-    }
-
-    th {
-        background-color: #f2f2f2;
-    }
-
-    /* CSS cho nút sửa và xóa */
-    .btn {
-        padding: 5px 10px;
-        border: none;
-        border-radius: 3px;
-        color: #FF0000;
-        cursor: pointer;
-    }
-
-    .btn-primary {
-        background-color: #007bff;
-        color: #fff;
-    }
-
-    .btn-danger {
-        background-color: #dc3545;
-        color: #fff;
-    }
-
-    /* CSS cho nút thêm mới */
-    .btn-add {
-        padding: 5px 10px;
-        border: none;
-        border-radius: 3px;
-        background-color: #f44336;
-        color: #fff;
-        cursor: pointer;
-    }
-
-    tr:hover {
-        background-color: #E6E6E6;
-        transition: background-color 0.3s;
-    }
-
-    tr:hover td {
-        transform: scale(1.1);
-        transition: transform 0.3s;
-    }
-
-    .card-footer {
-        background-color: #f8f9fa;
-        border-top: 1px solid #dee2e6;
-        padding: 0.75rem 1.25rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .pagination {
-        display: inline-block;
-       margin: 0;
-        padding: 0;
-    }
-
-    .pagination li {
-        display: inline;
-    }
-
-    .pagination li a {
-        color: #007bff;
-        padding: 0.25rem 0.5rem;
-        text-decoration: none;
-        background-color: blue;
-        /* Màu nền của ô phân trang */
-    }
-
-    .pagination li.active a {
-        background-color: #007bff;
-        color: #fff;
-    }
-
-    .pagination li.disabled a {
-        color: #6c757d;
-        pointer-events: none;
-    }
-
-    .btn-add {
-        padding: 5px 10px;
-        border: none;
-        border-radius: 3px;
-        background-color: red;
-        color: #fff;
-        cursor: pointer;
-    }
-</style>
