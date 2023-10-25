@@ -10,7 +10,7 @@
     <!-- Alert -->
     @include('admin.includes.global.alert')
     <!-- Form search -->
-    <form action="" method="get">
+    <form action="{{ route('contracts.index') }}" method="get">
         <div class="card-header">
             <div class="row">
                 <div class="col">
@@ -73,7 +73,7 @@
                             </div>
                         </div>
                         <div class="col">
-                            <a href="" class="btn btn-primary">
+                            <a href="{{ route('contracts.create') }}" class="btn btn-primary">
                                 <i class="bx bx-plus"></i> @lang('sys.add_new')
                             </a>
                         </div>
