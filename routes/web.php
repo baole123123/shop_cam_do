@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,3 +22,4 @@ Route::get('/add', function () {
 Route::get('/list', function () {
     return view('list');
 });
+Route::resource('user', UserController::class);

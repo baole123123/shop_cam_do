@@ -73,6 +73,7 @@
 	<script src="{{asset('assets/vendor/libs/i18n/i18n.js')}}"></script>
 	<script src="{{asset('assets/vendor/libs/typeahead-js/typeahead.js')}}"></script>
 	<script src="{{asset('assets/vendor/js/menu.js')}}"></script>
+	<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 	<!-- endbuild -->
 	<!-- Vendors JS -->
 	<!-- Main JS -->
