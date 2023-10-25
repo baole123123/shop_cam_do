@@ -19,7 +19,7 @@ class ContractController extends Controller
     {
         $query = Contract::select('*');
         $query->orderBy('id', 'DESC');
-        $items = $query->paginate(20);
+        $items = $query->paginate(1);
         $params = [
             'items' => $items,
         ];

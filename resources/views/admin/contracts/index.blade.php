@@ -128,8 +128,10 @@
     </div>
 
     <!-- Pagination -->
-    <div class="card-footer">
-        {{ $items->appends(request()->query())->links() }}
+    <div class="card-footer pt-1 pb-1">
+        <div class="float-end">
+            {{ $items->appends(request()->query())->links() }}
+        </div>
     </div>
 
 </div>
