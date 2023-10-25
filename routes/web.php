@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/master', function () {
     return view('welcome');
 });
 Route::get('/add', function () {
@@ -22,3 +23,8 @@ Route::get('/add', function () {
 Route::get('/list', function () {
     return view('list');
 });
+// Route::get('/customer', [CustomerController::class, 'index'])->name('admin.index');
+// Route::get('/customer', [CustomerController::class, 'index'])->name('admin.index');
+// Route::get('/customer', [CustomerController::class, 'index'])->name('admin.index');
+Route::resource('customers', CustomerController::class);
+
