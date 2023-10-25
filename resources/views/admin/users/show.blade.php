@@ -5,7 +5,7 @@
 
     <head>
         <h2 style="text-align: center;">Show</h2>
-        <a href="{{ route('user.index', ['user' => $users->id]) }}">
+        <a href="{{ route('users.index', ['user' => $users->id]) }}">
             <button class="btn btn-primary">
                 <i class='bx bx-arrow-back'></i>
             </button>

@@ -15,7 +15,7 @@
 
 <div class="container">
   <h2 style="text-align: center;">Users</h2>
-  <form action="{{route('user.store')}}" method='post'>
+  <form action="{{route('users.store')}}" method='post'>
     @csrf
     <div class="form-group">
       <label for="email">Name:</label>

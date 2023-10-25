@@ -6,7 +6,7 @@
   <div class="container">
 <h2 style="text-align: center;">Edit</h2>
 
-<form action="{{route('user.update',$users->id)}}" method ="POST" enctype="multipart/form-data">
+<form action="{{route('users.update',$users->id)}}" method ="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
   <label for="name">Name:</label><br>

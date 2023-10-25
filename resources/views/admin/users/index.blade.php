@@ -76,7 +76,7 @@
           </div>
           <div class="card-body">
               <div class="table-responsive">
-                  <a href="{{ route('user.create') }}">
+                  <a href="{{ route('users.create') }}">
                     <button class="btn btn-success">
                         <i class='bx bx-user-plus'></i>
                       </button>
@@ -127,17 +127,17 @@
                               </td>
                               <td class="text-center">
                                   <div class="button-group">
-                                      <a href="{{ route('user.edit', ['user' => $user->id]) }}">
+                                      <a href="{{ route('users.edit', ['user' => $user->id]) }}">
                                           <button class="btn btn-primary">
                                             <i class='bx bxs-edit-alt'></i>
                                           </button>
                                       </a>
-                                      <a href="{{ route('user.show', ['user' => $user->id]) }}">
+                                      <a href="{{ route('users.show', ['user' => $user->id]) }}">
                                           <button class="btn btn-secondary">
                                             <i class='bx bxs-show'></i>
                                           </button>
                                       </a>
-                                      <form action="{{ route('user.destroy', $user->id) }}" method="POST">
+                                      <form action="{{ route('users.destroy', $user->id) }}" method="POST">
                                           @csrf
                                           @method('DELETE')
                                           <button type="submit" class="btn btn-danger">

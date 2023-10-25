@@ -22,7 +22,7 @@ class UserController extends Controller
         $users->phone = $request->phone;
         $users->address = $request->address;
         $users->save();
-        return redirect()->route('user.index')->with('status','Thêm thành công');
+        return redirect()->route('users.index')->with('status','Thêm thành công');
     }
     public function edit($id) {
         $users = User::find($id);
@@ -38,7 +38,7 @@ class UserController extends Controller
         $users->phone = $request->phone;
         $users->address = $request->address;
         $users->save();
-        return redirect()->route('user.index')->with('status','Sửa thành công');
+        return redirect()->route('users.index')->with('status','Sửa thành công');
     }
     public function show($id) {
         $users = User::find($id);
@@ -46,6 +46,6 @@ class UserController extends Controller
     }
     public function destroy($id) {
         $users = User::destroy($id);
-        return redirect()->route('user.index',compact('users'));
+        return redirect()->route('users.index',compact('users'));
     }
 }
