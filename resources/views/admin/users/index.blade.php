@@ -14,30 +14,17 @@
         <div class="card-header">
             <div class="row">
                 <div class="col">
-                    <select id="ProductStatus" class="form-select text-capitalize">
-                        <option value="">Tất cả</option>
-                        <option value="dang_vay">Đang vay</option>
-                        <option value="du_lai">Đủ lãi</option>
-                        <option value="no">Nợ</option>
-                        <option value="qua_han">Quá hạn</option>
-                    </select>
+                    <input type="text" name="phone" value="{{ request()->phone }}" class="form-control" placeholder="Số điện thoại">
                 </div>
                 <div class="col">
-                    <select id="ProductStatus" class="form-select text-capitalize">
-                        <option value="">Tất cả</option>
-                        <option value="dang_vay">Đang vay</option>
-                        <option value="du_lai">Đủ lãi</option>
-                        <option value="no">Nợ</option>
-                        <option value="qua_han">Quá hạn</option>
-                    </select>
+                    <input type="text" name="address" value="{{ request()->address }}" class="form-control" placeholder="Địa chỉ">
                 </div>
                 <div class="col">
-                    <select id="ProductStatus" class="form-select text-capitalize">
-                        <option value="">Thời gian</option>
-                        <option value="dang_vay">Đang vay</option>
-                        <option value="du_lai">Đủ lãi</option>
-                        <option value="no">Nợ</option>
-                        <option value="qua_han">Quá hạn</option>
+                    <select name="group_id" class="form-select text-capitalize">
+                        <option value="">Tất cả</option>
+                        <option value="1">Quản trị viên</option>
+                        <option value="2">Quản lý</option>
+                        <option value="3">Nhân viên</option>
                     </select>
                 </div>
                 <div class="col-md-1">
@@ -50,13 +37,15 @@
         <div class="card-header border-top">
             <div class="row">
                 <div class="col-md-6">
-                    <input type="text" class="form-control" placeholder="Tên, sdt khách hàng">
+                    <input type="text" value="{{ request()->name_email }}" name="name_email" class="form-control" placeholder="Email, tên nhân viên">
                 </div>
                 <div class="col-md-6">
                     <div class="row">
                         <div class="col">
-                            <select id="limit" class="form-select text-capitalize">
+                            <select id="limit" name="limit" class="form-select text-capitalize">
                                 <option value="10">10</option>
+                                <option value="20">20</option>
+                                <option value="30">30</option>
                             </select>
                         </div>
                         <div class="col">
@@ -94,6 +83,7 @@
                         <th>Email</th>
                         <th>Số điện thoại</th>
                         <th>Địa chỉ</th>
+                        <th>Nhóm nhân viên</th>
                         <th>Hành động</th>
                     </tr>
                 </thead>
@@ -115,6 +105,7 @@
                         <td>{{ $item->email }}</td>
                         <td>{{ $item->phone }}</td>
                         <td>{{ $item->address }}</td>
+                        <td>{{ $groups[$item->group_id] }}</td>
                         <td>
                             <div class="dropdown">
                                 <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>

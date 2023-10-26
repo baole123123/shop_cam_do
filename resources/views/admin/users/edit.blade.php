@@ -58,28 +58,47 @@
                         <div class="card-body">
                             <div class="row mb-10">
                                 <div class="col-6">
-                                    <label class="form-label">Tên</label>
-                                    <input type="text" class="form-control"
-                                        placeholder="Nhập tên" name="name" value="{{$item->name}}">
-                                        @error('name') <div class="alert alert-danger">{{ $message }}</div> @enderror
+                                    <div class="mb-3">
+                                        <label class="form-label">Tên</label>
+                                        <input type="text" class="form-control"
+                                            placeholder="Nhập tên" name="name" value="{{$item->name}}">
+                                            @error('name') <div class="alert alert-danger">{{ $message }}</div> @enderror
+                                    </div>
                                 </div>
                                 <div class="col-6">
-                                    <label class="form-label">Email</label>
-                                    <input type="text" class="form-control"
-                                        placeholder="Nhập email" name="email" value="{{$item->email}}">
-                                        @error('email') <div class="alert alert-danger">{{ $message }}</div> @enderror
+                                    <div class="mb-3">
+                                        <label class="form-label">Email</label>
+                                        <input type="text" class="form-control"
+                                            placeholder="Nhập email" name="email" value="{{$item->email}}">
+                                            @error('email') <div class="alert alert-danger">{{ $message }}</div> @enderror
+                                    </div>
                                 </div>
                                 <div class="col-6">
-                                    <label class="form-label">Số điện thoại</label>
-                                    <input type="text" class="form-control"
-                                        placeholder="Nhập số điện thoại" name="phone" value="{{$item->phone}}">
-                                        @error('phone') <div class="alert alert-danger">{{ $message }}</div> @enderror
+                                    <div class="mb-3">
+                                        <label class="form-label">Số điện thoại</label>
+                                        <input type="text" class="form-control"
+                                            placeholder="Nhập số điện thoại" name="phone" value="{{$item->phone}}">
+                                            @error('phone') <div class="alert alert-danger">{{ $message }}</div> @enderror
+                                    </div>
                                 </div>
                                 <div class="col-6">
-                                    <label class="form-label">Địa chỉ</label>
-                                    <input type="text" class="form-control"
-                                        placeholder="Nhập địa chỉ" name="address" value="{{$item->address}}">
-                                        @error('address') <div class="alert alert-danger">{{ $message }}</div> @enderror
+                                    <div class="mb-3">
+                                        <label class="form-label">Địa chỉ</label>
+                                        <input type="text" class="form-control"
+                                            placeholder="Nhập địa chỉ" name="address" value="{{$item->address}}">
+                                            @error('address') <div class="alert alert-danger">{{ $message }}</div> @enderror
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Nhóm nhân viên</label>
+                                        <select class="form-control" name="group_id">
+                                            <option value="">Tất cả</option>
+                                            <option @selected($item->group_id == '1') value="1">Quản trị viên</option>
+                                            <option @selected($item->group_id == '2') value="2">Quản lý</option>
+                                            <option @selected($item->group_id == '3') value="3">Nhân viên</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
