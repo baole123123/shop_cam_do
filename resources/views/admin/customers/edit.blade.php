@@ -59,6 +59,34 @@
                                 </div>
                                 <div class="col-6">
                                     <div class="mb-3">
+                                        <label class="form-label">Ảnh CCCD</label>
+                                        <input type="file" class="form-control" placeholder="Ảnh CCCD" name="identification" value="{{ $item->identification }}">
+                                        @error('identification') <div class="alert alert-danger">{{ $message }}</div> @enderror
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Ảnh mặt trước</label>
+                                        <input type="file" class="form-control" placeholder="Ảnh mặt trước" name="id_image_front" value="{{ $item->id_image_front }}">
+                                        @error('id_image_front') <div class="alert alert-danger">{{ $message }}</div> @enderror
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Ảnh mặt sau</label>
+                                        <input type="file" class="form-control" placeholder="Ảnh mặt sau" name="id_image_back" value="{{ $item->id_image_back }}">
+                                        @error('id_image_back') <div class="alert alert-danger">{{ $message }}</div> @enderror
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Ảnh chân dung</label>
+                                        <input type="file" class="form-control" placeholder="Ảnh chân dung" name="image_user" value="{{ $item->image_user }}">
+                                        @error('image_user') <div class="alert alert-danger">{{ $message }}</div> @enderror
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="mb-3">
                                         <label class="form-label mb-1" for="status-org">Trạng thái </label>
                                         <select class="form-control" name="status">
                                             <option value="">Tất cả</option>
