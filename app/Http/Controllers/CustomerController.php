@@ -20,7 +20,7 @@ class CustomerController extends Controller
         $query = Customer::select('*');
         if (isset($request->s)) {
             $query->where('name', 'like', "%$request->s%")
-            ->orWhere('phone', 'like', "%$request->s%");
+                ->orWhere('phone', 'like', "%$request->s%");
         }
         if ($request->sitiuation) {
             $query->where('sitiuation', 'LIKE', "%$request->sitiuation%");
@@ -38,7 +38,7 @@ class CustomerController extends Controller
     public function create()
     {
         $customers = Customer::get();
-        return view('admin.customers.create' ,compact('customers'));
+        return view('admin.customers.create', compact('customers'));
     }
     public function store(StoreCustomerRequest $request)
     {
@@ -75,7 +75,7 @@ class CustomerController extends Controller
         //...
         try {
             $item->save();
-            SystemLog::addLog('Customer','store',$item->id);
+            SystemLog::addLog('Customer', 'store', $item->id);
             return redirect()->route('customers.index')->with('success', __('sys.store_item_success'));
         } catch (QueryException $e) {
             Log::error($e->getMessage());
@@ -100,42 +100,36 @@ class CustomerController extends Controller
     {
         try {
             $item = Customer::findOrFail($id);
-            // Save to fields
-            $item->name = $request->name;
-            $item->email = $request->email;
-            $item->phone = $request->phone;
-            $item->address = $request->address;
-            $item->birthday = $request->birthday;
-            $item->identification = $request->identification;
-            $item->id_image_front = $request->id_image_front;
-            $item->id_image_back = $request->id_image_back;
-            $item->image_user = $request->image_user;
-            $item->status = $request->status;
-            $item->sitiuation = $request->sitiuation;
+            $data = $request->all();
 
+            // Kiểm tra và cập nhật ảnh chỉ khi có sự thay đổi
             if ($request->hasFile('identification')) {
-                $item->identification = $this->uploadFile($request->file('identification'), 'uploads');
+                $data['identification'] = $this->uploadFile($request->file('identification'), 'uploads');
             }
+
             if ($request->hasFile('id_image_front')) {
-                $item->id_image_front = $this->uploadFile($request->file('id_image_front'), 'uploads');
+                $data['id_image_front'] = $this->uploadFile($request->file('id_image_front'), 'uploads');
             }
+
             if ($request->hasFile('id_image_back')) {
-                $item->id_image_back = $this->uploadFile($request->file('id_image_back'), 'uploads');
+                $data['id_image_back'] = $this->uploadFile($request->file('id_image_back'), 'uploads');
             }
+
             if ($request->hasFile('image_user')) {
-                $item->image_user = $this->uploadFile($request->file('image_user'), 'uploads');
+                $data['image_user'] = $this->uploadFile($request->file('image_user'), 'uploads');
             }
-            $item->save();
-            SystemLog::addLog('Customer','update',$item->id);
+
+            $item->update($data);
+
+            SystemLog::addLog('Customer', 'update', $item->id);
             return redirect()->route('customers.index')->with('success', __('sys.update_item_success'));
         } catch (ModelNotFoundException $e) {
             Log::error($e->getMessage());
             return redirect()->route('customers.index')->with('error', __('sys.item_not_found'));
-        } catch (QueryException  $e) {
+        } catch (QueryException $e) {
             Log::error($e->getMessage());
             return redirect()->route('customers.index')->with('error', __('sys.update_item_error'));
         }
-
     }
 
 
@@ -144,7 +138,7 @@ class CustomerController extends Controller
         try {
             $item = Customer::findOrFail($id);
             $item->delete();
-            SystemLog::addLog('Customer','destroy',$item->id);
+            SystemLog::addLog('Customer', 'destroy', $item->id);
             return redirect()->route('customers.index')->with('success', __('sys.destroy_item_success'));
         } catch (ModelNotFoundException $e) {
             Log::error($e->getMessage());

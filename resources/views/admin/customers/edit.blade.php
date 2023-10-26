@@ -4,7 +4,7 @@
     <h4 class="py-3 mb-4">
         <span class="text-muted fw-light">Chỉnh sửa /</span><span> Khách Hàng</span>
     </h4>
-    <form action="{{route('customers.update' , $item->id)}}" method="POST">
+    <form action="{{route('customers.update' , $item->id)}}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="app-ecommerce">
