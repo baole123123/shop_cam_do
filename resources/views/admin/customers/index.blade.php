@@ -21,30 +21,19 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col">
-                        <select id="ProductStatus" class="form-select text-capitalize">
-                            <option value="">Tất cả</option>
+                        <select id="ProductStatus" name="status" class="form-select text-capitalize">
+                            <option value="">Trạng Thái</option>
                             <option value="dang_vay">Đang vay</option>
-                            <option value="du_lai">Đủ lãi</option>
-                            <option value="no">Nợ</option>
-                            <option value="qua_han">Quá hạn</option>
+                            <option value="ket_thuc">Kết thúc</option>
+                            <option value="chua_co_hop_dong">Chưa có hợp đồng</option>
                         </select>
                     </div>
                     <div class="col">
-                        <select id="ProductStatus" class="form-select text-capitalize">
-                            <option value="">Tất cả</option>
-                            <option value="dang_vay">Đang vay</option>
-                            <option value="du_lai">Đủ lãi</option>
-                            <option value="no">Nợ</option>
-                            <option value="qua_han">Quá hạn</option>
-                        </select>
-                    </div>
-                    <div class="col">
-                        <select id="ProductStatus" class="form-select text-capitalize">
-                            <option value="">Thời gian</option>
-                            <option value="dang_vay">Đang vay</option>
-                            <option value="du_lai">Đủ lãi</option>
-                            <option value="no">Nợ</option>
-                            <option value="qua_han">Quá hạn</option>
+                        <select id="ProductStatus" name="sitiuation" class="form-select text-capitalize">
+                            <option value="">Tình Trạng</option>
+                            <option value="binh_thuong">Bình thường</option>
+                            <option value="no_xua">Nợ xấu</option>
+                            <option value="no_rui_ro">Nợ rủi ro</option>
                         </select>
                     </div>
                     <div class="col-md-1">
@@ -64,6 +53,9 @@
                             <div class="col">
                                 <select id="limit" class="form-select text-capitalize">
                                     <option value="10">10</option>
+                                    <option value="10">20</option>
+                                    <option value="10">30</option>
+
                                 </select>
                             </div>
                             <div class="col">
@@ -100,6 +92,7 @@
                             <th>Số Điện Thoại</th>
                             <th>Địa chỉ</th>
                             <th>Trạng thái</th>
+                            <th>Tình trạng</th>
                             <th>Thao tác</th>
                         </tr>
                     </thead>
@@ -121,11 +114,12 @@
                             <td>{{ $customer->phone }}</td>
                             <td>{{ $customer->address }}</td>
                             <td>{{ $customer->status }}</td>
+                            <td>{{ $customer->sitiuation }}</td>
                             <td>
                                 <div class="dropdown">
                                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>
                                     <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="{{route('customers.edit' , $customer->id)}}"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                        <a class="dropdown-item" href="{{route('customers.edit' , $customer->id)}}"><i class="bx bx-edit-alt me-1"></i> Edit</a>
                                         </form>
 
                                         <a class="dropdown-item" href="{{route('customers.show' , $customer->id)}}"><i class="bx bx-show me-1"></i> Show</a>

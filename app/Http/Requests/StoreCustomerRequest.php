@@ -24,9 +24,11 @@ class StoreCustomerRequest extends FormRequest
         return [
             'name' => 'required',
             'email' => 'required',
-            'phone' => 'required|unique:customers',
+            'phone' => 'required',
             'address' => 'required',
             'status' => 'required',
+            'sitiuation' => 'required',
+
         ];
     }
     public function messages()
@@ -35,9 +37,10 @@ class StoreCustomerRequest extends FormRequest
             'name.required' => 'Tên bắt buộc nhập.',
             'email.required' => 'Email bắt buộc nhập.',
             'phone.required' => 'Vui lòng điền.',
-            'phone.unique' => 'Tối đa 11 số.' ,
             'address.required' => 'Vui lòng điền.',
             'status.required' => 'Vui lòng điền.',
+            'sitiuation.required' => 'Vui lòng điền.',
+
 
         ];
     }

@@ -20,6 +20,12 @@ class CustomerController extends Controller
             $query->where('name', 'like', "%$request->s%")
             ->orWhere('phone', 'like', "%$request->s%");
         }
+        if ($request->sitiuation) {
+            $query->where('sitiuation', 'LIKE', "%$request->sitiuation%");
+        }
+        if ($request->status) {
+            $query->where('status', 'LIKE', "%$request->status%");
+        }
         $query->orderBy('id', 'DESC');
         $items = $query->paginate(3);
         $params = [
@@ -47,6 +53,8 @@ class CustomerController extends Controller
         $item->id_image_back = $request->id_image_back;
         $item->image_user = $request->image_user;
         $item->status = $request->status;
+        $item->sitiuation = $request->sitiuation;
+
 
 
         // xử lý ảnh
@@ -86,12 +94,20 @@ class CustomerController extends Controller
 
     public function update(Request $request, $id)
     {
-
         try {
             $item = Customer::findOrFail($id);
             // Save to fields
             $item->name = $request->name;
-            //...
+            $item->email = $request->email;
+            $item->phone = $request->phone;
+            $item->address = $request->address;
+            $item->birthday = $request->birthday;
+            $item->identification = $request->identification;
+            $item->id_image_front = $request->id_image_front;
+            $item->id_image_back = $request->id_image_back;
+            $item->image_user = $request->image_user;
+            $item->status = $request->status;
+            $item->sitiuation = $request->sitiuation;
             $item->save();
             SystemLog::addLog('Customer','update',$item->id);
             return redirect()->route('customers.index')->with('success', __('sys.update_item_success'));
@@ -103,34 +119,6 @@ class CustomerController extends Controller
             return redirect()->route('customers.index')->with('error', __('sys.update_item_error'));
         }
 
-        $item = Customer::find($id);
-        $item->name = $request->name;
-        $item->email = $request->email;
-        $item->phone = $request->phone;
-        $item->address = $request->address;
-        $item->birthday = $request->birthday;
-        $item->identification = $request->identification;
-        $item->id_image_front = $request->id_image_front;
-        $item->id_image_back = $request->id_image_back;
-        $item->image_user = $request->image_user;
-        $item->status = $request->status;
-
-
-        // xử lý ảnh
-        $fieldName = 'image';
-        if ($request->hasFile($fieldName)) {
-            $fullFileNameOrigin = $request->file($fieldName)->getClientOriginalName();
-            $fileNameOrigin = pathinfo($fullFileNameOrigin, PATHINFO_FILENAME);
-            $extenshion = $request->file($fieldName)->getClientOriginalExtension();
-            $fileName = $fileNameOrigin . '-' . rand() . '_' . time() . '.' . $extenshion;
-            $path = 'storage/' . $request->file($fieldName)->storeAs('public/images', $fileName);
-            $path = str_replace('public/', '', $path);
-            $item->image = $path;
-        }
-
-        $item->save();
-
-        return redirect()->route('customers.index');
     }
 
 

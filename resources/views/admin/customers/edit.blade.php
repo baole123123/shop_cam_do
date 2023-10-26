@@ -18,9 +18,7 @@
                     <button type="submit" class="btn btn-primary">Lưu</button>
 
                 </div>
-
             </div>
-
             <div class="row">
                 <!-- First column-->
                 <div class="col-12 col-lg-12">
@@ -30,29 +28,59 @@
                             <h5 class="card-tile mb-0">Thông tin Khách Hàng</h5>
                         </div>
                         <div class="card-body">
-                            <div class="mb-3">
-                                <label class="form-label" for="ecommerce-customer-name">Tên</label>
-                                <input type="text" class="form-control" placeholder="Tên" name="name" value="{{ $item->name }}">
-                                @error('name') <div class="alert alert-danger">{{ $message }}</div> @enderror
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col"><label class="form-label" for="ecommerce-customer-email">Email</label>
-                                    <input type="text" class="form-control" placeholder="Email" name="email" value="{{ $item->email }}">
-                                    @error('email') <div class="alert alert-danger">{{ $message }}</div> @enderror
+                            <div class="row mb-10">
+                                <div class="col-12">
+                                    <div class="mb-3">
+                                        <label class="form-label">Tên</label>
+                                        <input type="text" class="form-control" placeholder="Tên" name="name" value="{{ $item->name }}">
+                                        @error('name') <div class="alert alert-danger">{{ $message }}</div> @enderror
+                                    </div>
                                 </div>
-                                <div class="col"><label class="form-label" for="ecommerce-customer-phone">Số Điện Thoại</label>
-                                    <input type="text" class="form-control" placeholder="0123-4567" name="phone" value="{{ $item->phone }}">
-                                    @error('phone') <div class="alert alert-danger">{{ $message }}</div> @enderror
+                                <div class="col-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Email</label>
+                                        <input type="text" class="form-control" placeholder="Email" name="email" value="{{ $item->email }}">
+                                        @error('email') <div class="alert alert-danger">{{ $message }}</div> @enderror
+                                    </div>
                                 </div>
-                                <div class="mb-3">
-                                    <label class="form-label" for="ecommerce-customer-address">Địa chỉ</label>
-                                    <input type="text" class="form-control" placeholder="Địa Chỉ" name="address" value="{{ $item->address }}">
-                                    @error('address') <div class="alert alert-danger">{{ $message }}</div> @enderror
+                                <div class="col-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Số Điện Thoại</label>
+                                        <input type="text" class="form-control" placeholder="0123-4567" name="phone" value="{{ $item->phone }}">
+                                        @error('phone') <div class="alert alert-danger">{{ $message }}</div> @enderror
+                                    </div>
                                 </div>
-                                <div class="mb-3">
-                                    <label class="form-label" for="ecommerce-customer-address">Trạng thái</label>
-                                    <input type="text" class="form-control" placeholder="Trạng Thái" name="status" value="{{ $item->status }}" style="width: 630px;">
-                                    @error('status') <div class="alert alert-danger">{{ $message }}</div> @enderror
+                                <div class="col-12">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="ecommerce-customer-address">Địa chỉ</label>
+                                        <input type="text" class="form-control" placeholder="Địa Chỉ" name="address" value="{{ $item->address }}">
+                                        @error('address') <div class="alert alert-danger">{{ $message }}</div> @enderror
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="mb-3">
+                                        <label class="form-label mb-1" for="status-org">Trạng thái </label>
+                                        <select class="form-control" name="status">
+                                            <option value="">Tất cả</option>
+                                            <option @selected($item->status == 'dang_vay') value="dang_vay">Đang vay</option>
+                                            <option @selected($item->status == 'ket_thuc') value="ket_thuc">Kết thúc</option>
+                                            <option @selected($item->status == 'chua_co_hop_dong') value="chua_co_hop_dong">Chưa có hợp đồng</option>
+                                        </select>
+                                        @error('status') <div class="alert alert-danger">{{ $message }}</div> @enderror
+
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="mb-3">
+                                        <label class="form-label mb-1" for="status-org">Tình trạng </label>
+                                        <select class="form-control" name="sitiuation">
+                                            <option value="">Tất cả</option>
+                                            <option @selected($item->sitiuation == 'binh_thuong') value="binh_thuong">Bình thường</option>
+                                            <option @selected($item->sitiuation == 'no_xau') value="no_xau">Nợ xấu</option>
+                                            <option @selected($item->sitiuation == 'no_rui_ro') value="no_rui_ro">Nợ rủi ro</option>
+                                        </select>
+                                        @error('sitiuation') <div class="alert alert-danger">{{ $message }}</div> @enderror
+                                    </div>
                                 </div>
                             </div>
                         </div>
