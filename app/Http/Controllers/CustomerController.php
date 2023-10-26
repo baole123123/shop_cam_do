@@ -10,9 +10,11 @@ use App\Http\Requests\UpdateCustomerRequest;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
+use App\Traits\UploadFileTrait;
 
 class CustomerController extends Controller
 {
+    use UploadFileTrait;
     public function index(Request $request)
     {
         $query = Customer::select('*');
@@ -58,15 +60,17 @@ class CustomerController extends Controller
 
 
         // xử lý ảnh
-        $fieldName = 'image';
-        if ($request->hasFile($fieldName)) {
-            $fullFileNameOrigin = $request->file($fieldName)->getClientOriginalName();
-            $fileNameOrigin = pathinfo($fullFileNameOrigin, PATHINFO_FILENAME);
-            $extenshion = $request->file($fieldName)->getClientOriginalExtension();
-            $fileName = $fileNameOrigin . '-' . rand() . '_' . time() . '.' . $extenshion;
-            $path = 'storage/' . $request->file($fieldName)->storeAs('public/images', $fileName);
-            $path = str_replace('public/', '', $path);
-            $item->image = $path;
+        if ($request->hasFile('identification')) {
+            $item->identification = $this->uploadFile($request->file('identification'), 'uploads');
+        }
+        if ($request->hasFile('id_image_front')) {
+            $item->id_image_front = $this->uploadFile($request->file('id_image_front'), 'uploads');
+        }
+        if ($request->hasFile('id_image_back')) {
+            $item->id_image_back = $this->uploadFile($request->file('id_image_back'), 'uploads');
+        }
+        if ($request->hasFile('image_user')) {
+            $item->image_user = $this->uploadFile($request->file('image_user'), 'uploads');
         }
         //...
         try {
@@ -108,6 +112,19 @@ class CustomerController extends Controller
             $item->image_user = $request->image_user;
             $item->status = $request->status;
             $item->sitiuation = $request->sitiuation;
+
+            if ($request->hasFile('identification')) {
+                $item->identification = $this->uploadFile($request->file('identification'), 'uploads');
+            }
+            if ($request->hasFile('id_image_front')) {
+                $item->id_image_front = $this->uploadFile($request->file('id_image_front'), 'uploads');
+            }
+            if ($request->hasFile('id_image_back')) {
+                $item->id_image_back = $this->uploadFile($request->file('id_image_back'), 'uploads');
+            }
+            if ($request->hasFile('image_user')) {
+                $item->image_user = $this->uploadFile($request->file('image_user'), 'uploads');
+            }
             $item->save();
             SystemLog::addLog('Customer','update',$item->id);
             return redirect()->route('customers.index')->with('success', __('sys.update_item_success'));
