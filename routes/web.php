@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/master', function () {
     return view('welcome');
 });
 Route::get('/add', function () {
@@ -22,6 +22,7 @@ Route::get('/list', function () {
     return view('list');
 });
 
-Route::resource('users', \App\Http\Controllers\UserController::class);
-Route::resource('contracts', \App\Http\Controllers\ContractController::class);
 
+Route::resource('customers', \App\Http\Controllers\CustomerController::class);
+Route::resource('contracts', \App\Http\Controllers\ContractController::class);
+Route::resource('users', \App\Http\Controllers\UserController::class);
