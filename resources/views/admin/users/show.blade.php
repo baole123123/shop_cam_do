@@ -5,7 +5,7 @@
 
     <head>
         <h2 style="text-align: center;">Show</h2>
-        <a href="{{ route('user.index', ['user' => $users->id]) }}">
+        <a href="{{ route('users.index', ['item' => $item->id]) }}">
             <button class="btn btn-primary">
                 <i class='bx bx-arrow-back'></i>
             </button>
@@ -18,10 +18,10 @@
                 <th>Address</th>
             </tr>
             <tr>
-                <td>{{ $users->name }}</td>
-                <td>{{ $users->email }}</td>
-                <td>{{ $users->phone }}</td>
-                <td>{{ $users->address }}</td>
+                <td>{{ $item->name }}</td>
+                <td>{{ $item->email }}</td>
+                <td>{{ $item->phone }}</td>
+                <td>{{ $item->address }}</td>
             </tr>
         </table>
         </body>
