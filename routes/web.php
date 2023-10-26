@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,5 +22,7 @@ Route::get('/list', function () {
     return view('list');
 });
 
+
 Route::resource('customers', \App\Http\Controllers\CustomerController::class);
 Route::resource('contracts', \App\Http\Controllers\ContractController::class);
+Route::resource('users', \App\Http\Controllers\UserController::class);
