@@ -80,7 +80,6 @@
                     <tr>
                         <th>STT</th>
                         <th>Tên</th>
-                        <th>Email</th>
                         <th>Số điện thoại</th>
                         <th>Địa chỉ</th>
                         <th>Nhóm nhân viên</th>
@@ -93,16 +92,12 @@
                         <td>{{ $index + 1 }}</td>
                         <td>
                             <div class="d-flex">
-                                <div class="avatar me-1">
-                                    <img src="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/assets/img/ecommerce-images/product-9.png" class="rounded-2">
-                                </div>
                                 <div class="td-info">
                                     <h6 class="text-body mb-0"> {{ $item->name }}</h6>
-                                    {{-- <small class="text-muted text-truncate d-none d-sm-block">{{ $item->address}}</small> --}}
+                                    <small class="text-muted text-truncate d-none d-sm-block">{{ $item->email}}</small>
                                 </div>
                             </div>
                         </td>
-                        <td>{{ $item->email }}</td>
                         <td>{{ $item->phone }}</td>
                         <td>{{ $item->address }}</td>
                         <td>{{ $groups[$item->group_id] }}</td>
