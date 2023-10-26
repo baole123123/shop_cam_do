@@ -17,7 +17,7 @@ class LogSeeder extends Seeder
                 'model_name' => 'Admin',
                 'object_id' => 1,
                 'action_name' => 'okban',
-                'user_id' => 8
+                'user_id' => 1
             ],
         ]);
     }

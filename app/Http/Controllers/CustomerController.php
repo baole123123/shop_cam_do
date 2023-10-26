@@ -61,16 +61,16 @@ class CustomerController extends Controller
 
         // xử lý ảnh
         if ($request->hasFile('identification')) {
-            $item->identification = $this->uploadFile($request->file('identification'), 'uploads', $disk = 'public', $filename = null);
+            $item->identification = $this->uploadFile($request->file('identification'), 'uploads');
         }
         if ($request->hasFile('id_image_front')) {
-            $item->id_image_front = $this->uploadFile($request->file('id_image_front'), 'uploads', $disk = 'public', $filename = null);
+            $item->id_image_front = $this->uploadFile($request->file('id_image_front'), 'uploads');
         }
         if ($request->hasFile('id_image_back')) {
-            $item->id_image_back = $this->uploadFile($request->file('id_image_back'), 'uploads', $disk = 'public', $filename = null);
+            $item->id_image_back = $this->uploadFile($request->file('id_image_back'), 'uploads');
         }
         if ($request->hasFile('image_user')) {
-            $item->image_user = $this->uploadFile($request->file('image_user'), 'uploads', $disk = 'public', $filename = null);
+            $item->image_user = $this->uploadFile($request->file('image_user'), 'uploads');
         }
         //...
         try {
@@ -114,16 +114,16 @@ class CustomerController extends Controller
             $item->sitiuation = $request->sitiuation;
 
             if ($request->hasFile('identification')) {
-                $item->identification = $this->uploadFile($request->file('identification'), 'uploads', $disk = 'public', $filename = null);
+                $item->identification = $this->uploadFile($request->file('identification'), 'uploads');
             }
             if ($request->hasFile('id_image_front')) {
-                $item->id_image_front = $this->uploadFile($request->file('id_image_front'), 'uploads', $disk = 'public', $filename = null);
+                $item->id_image_front = $this->uploadFile($request->file('id_image_front'), 'uploads');
             }
             if ($request->hasFile('id_image_back')) {
-                $item->id_image_back = $this->uploadFile($request->file('id_image_back'), 'uploads', $disk = 'public', $filename = null);
+                $item->id_image_back = $this->uploadFile($request->file('id_image_back'), 'uploads');
             }
             if ($request->hasFile('image_user')) {
-                $item->image_user = $this->uploadFile($request->file('image_user'), 'uploads', $disk = 'public', $filename = null);
+                $item->image_user = $this->uploadFile($request->file('image_user'), 'uploads');
             }
             $item->save();
             SystemLog::addLog('Customer','update',$item->id);
