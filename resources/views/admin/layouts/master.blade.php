@@ -22,6 +22,10 @@
 	<!-- Helpers -->
 	<script src="{{asset('assets/vendor/js/helpers.js')}}"></script>
 	<script src="{{asset('assets/js/config.js')}}"></script>
+
+	<!-- jquery bootstrap -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
     @yield('header')
 </head>
 <body>
