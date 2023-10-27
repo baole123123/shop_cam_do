@@ -15,18 +15,18 @@ class ContractSeeder extends Seeder
         DB::table('contracts')->insert([
             [
                 'customer_id' => 1,
-                'customer_name' => 'Phu',
-                'identi' => 'fdfdg',
-                'birthday' => '2023-6-29',
-                'customer_image' => 'xinloi',
+                'customer_name' => '',
+                'customer_identi' => '',
+                'customer_birthday' => '2023-06-29',
+                'customer_image' => '',
                 'contract_type_id' => 1,
                 'asset_id' => 1,
-                'total_loan' => '23.000',
-                'interest_payment_period' => 'sdfsgfms',
-                'interest_rate' => 'hhhhhhhhdgfy',
+                'total_loan' => '23',
+                'interest_payment_period' => '',
+                'interest_rate' => '',
                 'date_paid' => '2020-12-21',
-                'note' => 'nhanhdi',
-                'image' => 'gfshgsf',
+                'note' => '',
+                'image' => '',
                 'user_id' => 1
             ],
         ]);
