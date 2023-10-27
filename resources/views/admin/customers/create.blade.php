@@ -4,7 +4,7 @@
     <h4 class="py-3 mb-4">
         <span class="text-muted fw-light">Thêm Mới /</span><span> Khách Hàng</span>
     </h4>
-    <form action="{{route('customers.store')}}" method="POST">
+    <form action="{{route('customers.store')}}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="app-ecommerce">
             <!-- Add Product -->
@@ -57,8 +57,36 @@
                                 </div>
                                 <div class="col-6">
                                     <div class="mb-3">
+                                        <label class="form-label" for="ecommerce-customer-identification">Ảnh CCCD</label>
+                                        <input type="file" class="form-control" placeholder="Ảnh CCCD" name="identification" value="{{ old('identification') }}">
+                                        @error('identification') <div class="alert alert-danger">{{ $message }}</div> @enderror
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="ecommerce-customer-id_image_front">Ảnh mặt trước</label>
+                                        <input type="file" class="form-control" placeholder="Ảnh mặt trước" name="id_image_front" value="{{ old('id_image_front') }}">
+                                        @error('id_image_front') <div class="alert alert-danger">{{ $message }}</div> @enderror
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="ecommerce-customer-id_image_back">Ảnh mặt sau</label>
+                                        <input type="file" class="form-control" placeholder="Ảnh mặt sau" name="id_image_back" value="{{ old('id_image_back') }}">
+                                        @error('id_image_back') <div class="alert alert-danger">{{ $message }}</div> @enderror
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="ecommerce-customer-image_user">Ảnh chân dung</label>
+                                        <input type="file" class="form-control" placeholder="Ảnh chân dung" name="image_user" value="{{ old('image_user') }}">
+                                        @error('image_user') <div class="alert alert-danger">{{ $message }}</div> @enderror
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="mb-3">
                                         <label class="form-label mb-1" for="status-org">Trạng thái </label>
-                                        <select class="form-control" name="status" >
+                                        <select class="form-control" name="status">
                                             <option value="">Tất cả</option>
                                             <option value="dang_vay">Đang vay</option>
                                             <option value="ket_thuc">Kết thúc</option>
@@ -70,7 +98,7 @@
                                 <div class="col-6">
                                     <div class="mb-3">
                                         <label class="form-label mb-1" for="status-org">Tình trạng </label>
-                                        <select class="form-control" name="sitiuation" >
+                                        <select class="form-control" name="sitiuation">
                                             <option value="">Tất cả</option>
                                             <option value="binh_thuong">Bình thường</option>
                                             <option value="no_xau">Nợ xấu</option>

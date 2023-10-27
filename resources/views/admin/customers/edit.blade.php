@@ -4,7 +4,7 @@
     <h4 class="py-3 mb-4">
         <span class="text-muted fw-light">Chỉnh sửa /</span><span> Khách Hàng</span>
     </h4>
-    <form action="{{route('customers.update' , $item->id)}}" method="POST">
+    <form action="{{route('customers.update' , $item->id)}}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="app-ecommerce">
@@ -55,6 +55,34 @@
                                         <label class="form-label" for="ecommerce-customer-address">Địa chỉ</label>
                                         <input type="text" class="form-control" placeholder="Địa Chỉ" name="address" value="{{ $item->address }}">
                                         @error('address') <div class="alert alert-danger">{{ $message }}</div> @enderror
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Ảnh CCCD</label>
+                                        <input type="file" class="form-control" placeholder="Ảnh CCCD" name="identification" value="{{ $item->identification }}">
+                                        @error('identification') <div class="alert alert-danger">{{ $message }}</div> @enderror
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Ảnh mặt trước</label>
+                                        <input type="file" class="form-control" placeholder="Ảnh mặt trước" name="id_image_front" value="{{ $item->id_image_front }}">
+                                        @error('id_image_front') <div class="alert alert-danger">{{ $message }}</div> @enderror
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Ảnh mặt sau</label>
+                                        <input type="file" class="form-control" placeholder="Ảnh mặt sau" name="id_image_back" value="{{ $item->id_image_back }}">
+                                        @error('id_image_back') <div class="alert alert-danger">{{ $message }}</div> @enderror
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Ảnh chân dung</label>
+                                        <input type="file" class="form-control" placeholder="Ảnh chân dung" name="image_user" value="{{ $item->image_user }}">
+                                        @error('image_user') <div class="alert alert-danger">{{ $message }}</div> @enderror
                                     </div>
                                 </div>
                                 <div class="col-6">
