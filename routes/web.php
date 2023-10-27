@@ -26,3 +26,4 @@ Route::get('/list', function () {
 Route::resource('customers', \App\Http\Controllers\CustomerController::class);
 Route::resource('contracts', \App\Http\Controllers\ContractController::class);
 Route::resource('users', \App\Http\Controllers\UserController::class);
+Route::resource('asset', \App\Http\Controllers\AssetController::class);
