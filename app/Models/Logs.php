@@ -15,5 +15,10 @@ class Logs extends Model
         'action_name',
         'user_id',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
     public $timestamps = true;
 }
