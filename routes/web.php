@@ -23,7 +23,17 @@ Route::get('/list', function () {
 });
 
 
+Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 Route::resource('customers', \App\Http\Controllers\CustomerController::class);
 Route::resource('contracts', \App\Http\Controllers\ContractController::class);
 Route::resource('users', \App\Http\Controllers\UserController::class);
-Route::resource('asset', \App\Http\Controllers\AssetController::class);
+
+Route::get('logs', [\App\Http\Controllers\LogController::class, 'index'])->name('logs.index');;
+Route::get('expenses', [\App\Http\Controllers\ExpenseController::class, 'index'])->name('expenses.index');
+// asset
+Route::get('asset', [\App\Http\Controllers\AssetController::class, 'index'])->name('asset.index');
+Route::get('asset/show/{id}', [\App\Http\Controllers\AssetController::class, 'show'])->name('asset.show');
+Route::get('asset/edit/{id}', [\App\Http\Controllers\AssetController::class, 'edit'])->name('asset.edit');
+Route::put('asset/update/{id}', [\App\Http\Controllers\AssetController::class, 'update'])->name('asset.update');
+Route::delete('asset/destroy/{id}', [\App\Http\Controllers\AssetController::class, 'destroy'])->name('asset.destroy');
+
