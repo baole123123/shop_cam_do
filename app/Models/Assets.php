@@ -11,7 +11,7 @@ class Assets extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $table = 'Assets';
+    protected $table = 'assets';
     protected $fillable = [
         'name',
         'asset_type_id',

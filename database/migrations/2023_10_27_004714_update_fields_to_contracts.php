@@ -12,9 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('contracts', function (Blueprint $table) {
-            $table->date('birthday')->change();
-            $table->renameColumn('identi', 'customer_identi');
-            $table->renameColumn('birthday', 'customer_birthday');
+            $table->date('customer_birthday')->change();
         });
     }
 
