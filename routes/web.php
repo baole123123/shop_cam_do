@@ -32,6 +32,8 @@ Route::get('logs', [\App\Http\Controllers\LogController::class, 'index'])->name(
 Route::get('expenses', [\App\Http\Controllers\ExpenseController::class, 'index'])->name('expenses.index');
 // asset
 Route::get('asset', [\App\Http\Controllers\AssetController::class, 'index'])->name('asset.index');
+Route::get('asset/create', [\App\Http\Controllers\AssetController::class, 'create'])->name('asset.create');
+Route::post('asset/store', [\App\Http\Controllers\AssetController::class, 'store'])->name('asset.store');
 Route::get('asset/show/{id}', [\App\Http\Controllers\AssetController::class, 'show'])->name('asset.show');
 Route::get('asset/edit/{id}', [\App\Http\Controllers\AssetController::class, 'edit'])->name('asset.edit');
 Route::put('asset/update/{id}', [\App\Http\Controllers\AssetController::class, 'update'])->name('asset.update');

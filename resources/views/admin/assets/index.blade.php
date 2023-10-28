@@ -37,6 +37,15 @@ use App\Models\Assets;
                 </div>
             </div>
         </div>
+        <div class="card-header border-top">
+            <div class="row">
+                <div class="col">
+                    <a href="{{ route('asset.create') }}" class="btn btn-primary">
+                        <i class="bx bx-plus"></i> @lang('sys.add_new')
+                    </a>
+                </div>
+            </div>
+        </div>
     </form>
 
     <!-- Table -->

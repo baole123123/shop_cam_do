@@ -40,16 +40,15 @@ class AssetController extends Controller
         return view('admin.assets.index', ['items' => $items]);
     }
 
-    // public function create()
-    // {
-    //     return view("admin.assets.create");
-    // }
+    public function create()
+    {
+        return view("admin.assets.create");
+    }
 
     public function store(StoreAssetRequest $request)
     {
         $item = new Assets();
         $item->name = $request->name;
-        $item->asset_type_id = $request->asset_type_id;
         $item->status = $request->status;
         $item->contract_id = $request->contract_id;
         $item->description = $request->description;
