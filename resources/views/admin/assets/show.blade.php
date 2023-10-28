@@ -1,3 +1,7 @@
+<?php
+
+use App\Models\Assets;
+?>
 @extends('admin.layouts.master')
 @section('content')
 <!-- The Modal -->
@@ -38,22 +42,14 @@
                     <tr>
                         <td><strong>Tên tài sản</strong></td>
                         <td>{{ $item->name }}</td>
-                        <td><strong>Loại tài sản</strong></td>
-                        <td>
-                            @if($item->asset_type_id == 0)
-                            Cho vay
-                            @else
-                            Cầm đồ
-                            @endif
-                        </td>
                     </tr>
                     <tr>
                         <td><strong>Trạng thái</strong></td>
                         <td>
-                            @if($item->status == 0)
-                            Bình thường
-                            @else
-                            Cảnh báo
+                            @if($item->status == Assets::_CAM_CO)
+                            <?= Assets::getDescStatus(Assets::_CAM_CO) ?>
+                            @elseif ($item->status == Assets::_DA_TRA)
+                            <?= Assets::getDescStatus(Assets::_DA_TRA) ?>
                             @endif
                         </td>
                         <td><strong>Mã hợp đồng</strong></td>

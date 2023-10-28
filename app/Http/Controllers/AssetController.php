@@ -40,10 +40,10 @@ class AssetController extends Controller
         return view('admin.assets.index', ['items' => $items]);
     }
 
-    public function create()
-    {
-        return view("admin.assets.create");
-    }
+    // public function create()
+    // {
+    //     return view("admin.assets.create");
+    // }
 
     public function store(StoreAssetRequest $request)
     {
@@ -74,6 +74,9 @@ class AssetController extends Controller
             SystemLog::addLog('Assets', 'store', $item->id);
             return redirect()->route('asset.index')->with('success', __('sys.store_item_success'));
         } catch (QueryException $e) {
+            if ($item->images) {
+                $this->deleteFile([$item->images]);
+            }
             Log::error($e->getMessage());
             return redirect()->route('asset.index')->with('error', __('sys.store_item_error'));
         }
