@@ -1,3 +1,7 @@
+<?php
+
+use App\Models\Assets;
+?>
 @extends('admin.layouts.master')
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
@@ -28,38 +32,25 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-12">
+                                <div class="col-6">
                                     <div class="mb-3">
                                         <label class="form-label" for="name">Tên tài sản</label>
                                         <input type="text" class="form-control" placeholder="Tên tài sản" name="name" value="{{ old('name') ?? $item->name }}">
                                         @error('name') <div class="alert alert-danger">{{ $message }}</div> @enderror
                                     </div>
                                 </div>
-                                <div class="col-6">
-                                    <div class="mb-3">
-                                        <label class="form-label" for="asset_type_id">Loại tài sản</label>
-                                        <select class="form-control" name="asset_type_id">
-                                            @if(old('asset_type_id') !== null)
-                                            <option value="0" {{ (old('asset_type_id') == '0') ? 'selected' : '' }}>Cho vay</option>
-                                            <option value="1" {{ (old('asset_type_id') == '1') ? 'selected' : '' }}>Cầm đồ</option>
-                                            @else
-                                            <option value="0" {{ $item->asset_type_id == '0' ? 'selected' : '' }}>Cho vay</option>
-                                            <option value="1" {{ $item->asset_type_id == '1' ? 'selected' : '' }}>Cầm đồ</option>
-                                            @endif
-                                        </select>
-                                        @error('asset_type_id') <div class="alert alert-danger">{{ $message }}</div> @enderror
-                                    </div>
-                                </div>
+                                <?php
+                                ?>
                                 <div class="col-6">
                                     <div class="mb-3">
                                         <label class="form-label" for="status">Trạng thái</label>
                                         <select class="form-control" name="status">
                                             @if(old('status') !== null)
-                                            <option value="0" {{ (old('status') == '0') ? 'selected' : '' }}>Bình thường</option>
-                                            <option value="1" {{ (old('status') == '1') ? 'selected' : '' }}>Cảnh báo</option>
+                                            <option value="<?= Assets::_CAM_CO ?>" {{ (old('status') == Assets::_CAM_CO) ? 'selected' : '' }}><?= Assets::getDescStatus(Assets::_CAM_CO) ?></option>
+                                            <option value="<?= Assets::_DA_TRA ?>" {{ (old('status') == Assets::_DA_TRA) ? 'selected' : '' }}><?= Assets::getDescStatus(Assets::_DA_TRA) ?></option>
                                             @else
-                                            <option value="0" {{ $item->status == '0' ? 'selected' : '' }}>Bình thường</option>
-                                            <option value="1" {{ $item->status == '1' ? 'selected' : '' }}>Cảnh báo</option>
+                                            <option value="<?= Assets::_CAM_CO ?>" {{ $item->status == Assets::_CAM_CO ? 'selected' : '' }}><?= Assets::getDescStatus(Assets::_CAM_CO) ?></option>
+                                            <option value="<?= Assets::_DA_TRA ?>" {{ $item->status == Assets::_DA_TRA ? 'selected' : '' }}><?= Assets::getDescStatus(Assets::_DA_TRA) ?></option>
                                             @endif
                                         </select>
                                         @error('status') <div class="alert alert-danger">{{ $message }}</div> @enderror
