@@ -26,5 +26,6 @@ class Contracts extends Model
         'image',
         'user_id',
     ];
+
     public $timestamps = true;
 }
