@@ -15,7 +15,6 @@ class UpdateAssetRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'asset_type_id' => 'required',
             'status' => 'required',
         ];
     }
@@ -24,7 +23,6 @@ class UpdateAssetRequest extends FormRequest
     {
         return [
             'name.required' => 'Tên tài sản không được để trống',
-            'asset_type_id.required' => 'Loại tài sản không được để trống.',
             'status.required' => 'Trạng thái không được để trống.',
         ];
     }

@@ -1,3 +1,8 @@
+<?php
+
+use App\Models\Assets;
+?>
+
 @extends('admin.layouts.master')
 @section('content')
 <h4 class="py-3 mb-4">
@@ -19,32 +24,16 @@
                     <input type="text" name="contract_id" value="{{ request()->contract_id }}" class="form-control" placeholder="Mã hợp đồng">
                 </div>
                 <div class="col">
-                    <select name="asset_type_id" class="form-select text-capitalize">
-                        <option value="">Loại tài sản</option>
-                        <option value="0" {{ request()->input('asset_type_id') == '0' ? 'selected' : '' }}>Cho vay</option>
-                        <option value="1" {{ request()->input('asset_type_id') == '1' ? 'selected' : '' }}>Cầm đồ</option>
-                    </select>
-                </div>
-                <div class="col">
                     <select name="status" class="form-select text-capitalize">
                         <option value="">Trạng thái</option>
-                        <option value="0" {{ request()->input('status') == '0' ? 'selected' : '' }}>Bình thường</option>
-                        <option value="1" {{ request()->input('status') == '1' ? 'selected' : '' }}>Cảnh báo</option>
+                        <option value="<?= Assets::_CAM_CO ?>" {{ request()->input('status') == Assets::_CAM_CO ? 'selected' : '' }}><?= Assets::getDescStatus(Assets::_CAM_CO) ?></option>
+                        <option value="<?= Assets::_DA_TRA ?>" {{ request()->input('status') == Assets::_DA_TRA ? 'selected' : '' }}><?= Assets::getDescStatus(Assets::_DA_TRA) ?></option>
                     </select>
                 </div>
                 <div class="col-md-1">
                     <button class="btn btn-primary">
                         <i class="bx bx-search"></i>
                     </button>
-                </div>
-            </div>
-        </div>
-        <div class="card-header border-top">
-            <div class="row">
-                <div class="col-md-3">
-                    <a href="{{ route('asset.create') }}" class="btn btn-primary">
-                        <i class="bx bx-plus"></i> @lang('sys.add_new')
-                    </a>
                 </div>
             </div>
         </div>
@@ -58,7 +47,6 @@
                     <tr>
                         <th>STT</th>
                         <th>Tên tài sản</th>
-                        <th>Loại tài sản</th>
                         <th>Mã hợp đồng</th>
                         <th>Trạng thái</th>
                         <th>Hành động</th>
@@ -66,25 +54,11 @@
                 </thead>
                 <tbody class="table-border-bottom-0">
                     @foreach($items as $index => $item)
-                    <?php
-                        if ($item->asset_type_id == 0) {
-                            $item->asset_type_id = "Cho Vay";
-                        } else if ($item->asset_type_id == 1) {
-                            $item->asset_type_id = "Cầm đồ";
-                        }
-
-                        if ($item->status == 0) {
-                            $item->status = "Bình thường";
-                        } else if ($item->status == 1) {
-                            $item->status = "Cảnh báo";
-                        }
-                    ?>
                     <tr>
                         <td>{{ $loop->index + 1 + ($items->perPage() * ($items->currentPage() - 1)) }}</td>
                         <td>{{ $item->name }}</td>
-                        <td>{{ $item->asset_type_id }}</td>
                         <td>{{ $item->contract_id }}</td>
-                        <td>{{ $item->status }}</td>
+                        <td>{{ Assets::getDescStatus($item->status) }}</td>
                         <td>
                             <div class="dropdown">
                                 <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>
