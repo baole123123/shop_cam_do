@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Assets extends Model
 {
     use HasFactory;
-    use SoftDeletes;
 
     protected $table = 'assets';
     protected $fillable = [
