@@ -131,8 +131,6 @@ class CustomerController extends Controller
             return redirect()->route('customers.index')->with('error', __('sys.update_item_error'));
         }
     }
-
-
     public function destroy($id)
     {
         try {
