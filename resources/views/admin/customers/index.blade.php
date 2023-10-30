@@ -21,19 +21,19 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col">
-                        <select id="ProductStatus" name="status" class="form-select text-capitalize">
+                        <select name="status" class="form-select text-capitalize">
                             <option value="">Trạng Thái</option>
-                            <option value="dang_vay">Đang vay</option>
-                            <option value="ket_thuc">Kết thúc</option>
-                            <option value="chua_co_hop_dong">Chưa có hợp đồng</option>
+                            <option @selected( request()->status == 'dang_vay' ) value="dang_vay">Đang vay</option>
+                            <option @selected( request()->status == 'ket_thuc' ) value="ket_thuc">Kết thúc</option>
+                            <option @selected( request()->status == 'chua_co_hop_dong' ) value="chua_co_hop_dong">Chưa có hợp đồng</option>
                         </select>
                     </div>
                     <div class="col">
-                        <select id="ProductStatus" name="sitiuation" class="form-select text-capitalize">
+                        <select name="sitiuation" class="form-select text-capitalize">
                             <option value="">Tình Trạng</option>
-                            <option value="binh_thuong">Bình thường</option>
-                            <option value="no_xua">Nợ xấu</option>
-                            <option value="no_rui_ro">Nợ rủi ro</option>
+                            <option @selected( request()->sitiuation == 'binh_thuong') value="binh_thuong">Bình thường</option>
+                            <option @selected( request()->sitiuation == 'no_xau') value="no_xau">Nợ xấu</option>
+                            <option @selected( request()->sitiuation == 'no_rui_ro') value="no_rui_ro">Nợ rủi ro</option>
                         </select>
                     </div>
                     <div class="col-md-1">
@@ -46,16 +46,15 @@
             <div class="card-header border-top">
                 <div class="row">
                     <div class="col-md-6">
-                        <input type="text" name="s" class="form-control" placeholder="Tên, sdt khách hàng">
+                        <input type="text" value="{{ request()->s }}" name="s" class="form-control" placeholder="Tên, sdt khách hàng">
                     </div>
                     <div class="col-md-6">
                         <div class="row">
                             <div class="col">
                                 <select id="limit" class="form-select text-capitalize">
-                                    <option value="10">10</option>
-                                    <option value="10">20</option>
-                                    <option value="10">30</option>
-
+                                    <option @selected( request()->limit == 10 ) value="10">10</option>
+                                    <option @selected( request()->limit == 20 ) value="20">20</option>
+                                    <option @selected( request()->limit == 30 ) value="30">30</option>
                                 </select>
                             </div>
                             <div class="col">

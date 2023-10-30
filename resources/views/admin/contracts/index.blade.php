@@ -15,13 +15,7 @@
         <div class="card-header">
             <div class="row">
                 <div class="col">
-                    <select id="ProductStatus" class="form-select text-capitalize">
-                        <option value="">Tất cả</option>
-                        <option value="dang_vay">Đang vay</option>
-                        <option value="du_lai">Đủ lãi</option>
-                        <option value="no">Nợ</option>
-                        <option value="qua_han">Quá hạn</option>
-                    </select>
+                    <input type="text" name="name_phone" class="form-control" placeholder="SDT, tên khách hàng">
                 </div>
                 <div class="col">
                     <select id="ProductStatus" class="form-select text-capitalize">
@@ -56,8 +50,10 @@
                 <div class="col-md-6">
                     <div class="row">
                         <div class="col">
-                            <select id="limit" class="form-select text-capitalize">
+                            <select name="limit" class="form-select text-capitalize">
                                 <option value="10">10</option>
+                                <option value="20">20</option>
+                                <option value="30">30</option>
                             </select>
                         </div>
                         <div class="col">
@@ -90,39 +86,46 @@
             <table class="table border-top">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Category</th>
-                        <th>Actions</th>
+                        <th>STT</th>
+                        <th>Tên khách hàng</th>
+                        <th>Số CMND</th>
+                        <th>Loại hợp đồng</th>
+                        <th>Tên tài sản</th>
+                        <th>Nhân viên tạo</th>
+                        <th>Hành động</th>
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
-                    <!-- foreach( $items as $item ) -->
+                    @foreach($items as $index => $item)
                     <tr>
-                        <td>1</td>
+                        <td>{{ $index + 1}}</td>
                         <td>
                             <div class="d-flex">
                                 <div class="avatar me-1">
-                                    <img src="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/assets/img/ecommerce-images/product-9.png" class="rounded-2">
+                                    <img src="{{ asset($item->customer_image) }}" class="rounded-2">
                                 </div>
                                 <div class="td-info">
-                                    <h6 class="text-body mb-0">Tên</h6>
-                                    <small class="text-muted text-truncate d-none d-sm-block">Air Jordan is a line of basketball shoes produced by Nike</small>
+                                    <h6 class="text-body mb-0">{{ $item->customer_name }}</h6>
+                                    <small class="text-muted text-truncate d-none d-sm-block">{{ $item->customer_phone }}</small>
                                 </div>
                             </div>
                         </td>
-                        <td>Category 1</td>
+                        <td>{{ $item->customer_identi }}</td>
+                        <td>{{ $item->contract_type_id }}</td>
+                        <td>{{ $item->asset_id }}</td>
+                        <td>{{ $item->user_id }}</td>
                         <td>
                             <div class="dropdown">
                                 <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                    <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
+                                    <a class="dropdown-item" href="{{ route('contracts.edit',$item->id)}}"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                    <a class="dropdown-item" href="{{ route('contracts.show',$item->id)}}"><i class='bx bx-show-alt'></i> Show</a>
+                                    <a class="dropdown-item" href="{{ route('contracts.destroy',$item->id)}}"><i class="bx bx-trash me-1"></i> Delete</a>
                                 </div>
                             </div>
                         </td>
                     </tr>
-                    <!-- endforeach -->
+                    @endforeach
                 </tbody>
             </table>
         </div>

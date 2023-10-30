@@ -2,7 +2,7 @@
 <html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact layout-menu-collapsed " dir="ltr" data-theme="theme-default" data-assets-path="/assets/" data-template="vertical-menu-template">
 <head>
 	<meta charset="utf-8" />
-	<title>Collapsed menu - Layouts | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+	<title>H89 - </title>
 	<!-- Fonts -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,6 +11,8 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.0/css/boxicons.min.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/6.11.1/css/flag-icons.min.css" />
+	<!-- Favicon -->
+	<link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon/favicon.ico') }}" />
 	<!-- Core CSS -->
 	<link rel="stylesheet" href="{{asset('assets/vendor/css/rtl/core.css')}}" class="template-customizer-core-css" />
 	<link rel="stylesheet" href="{{asset('assets/vendor/css/rtl/theme-default.css')}}" class="template-customizer-theme-css" />
@@ -18,10 +20,15 @@
 	<!-- Vendors CSS -->
 	<link rel="stylesheet" href="{{asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css')}}" />
 	<link rel="stylesheet" href="{{asset('assets/vendor/libs/typeahead-js/typeahead.css')}}" />
+	<link rel="stylesheet" href="{{asset('assets/vendor/libs/apex-charts/apex-charts.css')}}" />
 	<!-- Page CSS -->
 	<!-- Helpers -->
 	<script src="{{asset('assets/vendor/js/helpers.js')}}"></script>
 	<script src="{{asset('assets/js/config.js')}}"></script>
+
+	<!-- jquery bootstrap -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
     @yield('header')
 </head>
 <body>
@@ -72,6 +79,7 @@
 	<script src="{{asset('assets/vendor/libs/hammer/hammer.js')}}"></script>
 	<script src="{{asset('assets/vendor/libs/i18n/i18n.js')}}"></script>
 	<script src="{{asset('assets/vendor/libs/typeahead-js/typeahead.js')}}"></script>
+	<script src="{{asset('assets/vendor/js/menu.js')}}"></script>
 	<script src="{{asset('assets/vendor/js/menu.js')}}"></script>
 	<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 	<!-- endbuild -->

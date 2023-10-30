@@ -18,18 +18,19 @@ class CustomerController extends Controller
     public function index(Request $request)
     {
         $query = Customer::select('*');
+        $limit = $request->limit ? $request->limit : 10;
         if (isset($request->s)) {
             $query->where('name', 'like', "%$request->s%")
                 ->orWhere('phone', 'like', "%$request->s%");
         }
         if ($request->sitiuation) {
-            $query->where('sitiuation', 'LIKE', "%$request->sitiuation%");
+            $query->where('sitiuation',$request->sitiuation);
         }
         if ($request->status) {
-            $query->where('status', 'LIKE', "%$request->status%");
+            $query->where('status',$request->status);
         }
         $query->orderBy('id', 'DESC');
-        $items = $query->paginate(3);
+        $items = $query->paginate($limit);
         $params = [
             'items' => $items,
         ];
@@ -50,14 +51,8 @@ class CustomerController extends Controller
         $item->phone = $request->phone;
         $item->address = $request->address;
         $item->birthday = $request->birthday;
-        $item->identification = $request->identification;
-        $item->id_image_front = $request->id_image_front;
-        $item->id_image_back = $request->id_image_back;
-        $item->image_user = $request->image_user;
         $item->status = $request->status;
         $item->sitiuation = $request->sitiuation;
-
-
 
         // xử lý ảnh
         if ($request->hasFile('identification')) {
@@ -100,26 +95,28 @@ class CustomerController extends Controller
     {
         try {
             $item = Customer::findOrFail($id);
-            $data = $request->all();
+            $item->name = $request->name;
+            $item->email = $request->email;
+            $item->phone = $request->phone;
+            $item->address = $request->address;
+            $item->birthday = $request->birthday;
+            $item->status = $request->status;
+            $item->sitiuation = $request->sitiuation;
 
-            // Kiểm tra và cập nhật ảnh chỉ khi có sự thay đổi
+            // xử lý ảnh
             if ($request->hasFile('identification')) {
-                $data['identification'] = $this->uploadFile($request->file('identification'), 'uploads');
+                $item->identification = $this->uploadFile($request->file('identification'), 'uploads');
             }
-
             if ($request->hasFile('id_image_front')) {
-                $data['id_image_front'] = $this->uploadFile($request->file('id_image_front'), 'uploads');
+                $item->id_image_front = $this->uploadFile($request->file('id_image_front'), 'uploads');
             }
-
             if ($request->hasFile('id_image_back')) {
-                $data['id_image_back'] = $this->uploadFile($request->file('id_image_back'), 'uploads');
+                $item->id_image_back = $this->uploadFile($request->file('id_image_back'), 'uploads');
             }
-
             if ($request->hasFile('image_user')) {
-                $data['image_user'] = $this->uploadFile($request->file('image_user'), 'uploads');
+                $item->image_user = $this->uploadFile($request->file('image_user'), 'uploads');
             }
-
-            $item->update($data);
+            $item->save();
 
             SystemLog::addLog('Customer', 'update', $item->id);
             return redirect()->route('customers.index')->with('success', __('sys.update_item_success'));

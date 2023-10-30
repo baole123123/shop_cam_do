@@ -15,5 +15,10 @@ class Expenses extends Model
         'amount',
         'note',
     ];
+
+    public function contract()
+    {
+        return $this->belongsTo(Contract::class, 'contract_id');
+    }
     public $timestamps = true;
 }
