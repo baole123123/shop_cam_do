@@ -36,13 +36,13 @@
                     <div class="card-body">
                         <div class="row mb-3">
                             <div class="col"><label class="form-label">Tên</label>
-                                <input type="text" class="form-control" placeholder="Tên khách vay" name="customer_name">
+                                <input type="text" class="form-control" placeholder="Tên khách vay" name="customer_name" value="{{ old('customer_name') }}">
                                 @error('customer_name')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                             </div>
                             <div class="col"><label class="form-label">Số điện thoại</label>
-                                <input type="text" class="form-control" placeholder="Số điện thoại khách vay" name="customer_phone">
+                                <input type="text" class="form-control" placeholder="Số điện thoại khách vay" name="customer_phone" value="{{ old('customer_phone') }}">
                                 @error('customer_phone')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
@@ -50,13 +50,13 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col"><label class="form-label">Ngày sinh</label>
-                                <input type="date" class="form-control" placeholder="Ngày sinh" name="customer_birthday">
+                                <input type="date" class="form-control" placeholder="Ngày sinh" name="customer_birthday" value="{{ old('customer_birthday') }}">
                                 @error('customer_birthday')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                             </div>
                             <div class="col"><label class="form-label">Số CCCD</label>
-                                <input type="text" class="form-control" placeholder="Số CCCD" name="customer_identi">
+                                <input type="text" class="form-control" placeholder="Số CCCD" name="customer_identi" value="{{ old('customer_identi') }}">
                                 @error('customer_identi')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
@@ -94,13 +94,13 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col"><label class="form-label">Tổng tiền vay</label>
-                                <input type="text" class="form-control" placeholder="Tổng tiền vay" name="total_loan">
+                                <input type="text" class="form-control" placeholder="Tổng tiền vay" name="total_loan" value="{{ old('total_loan') }}">
                                 @error('total_loan')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                             </div>
                             <div class="col"><label class="form-label">Kỳ đóng lãi</label>
-                                <input type="text" class="form-control" placeholder="Kỳ đóng lãi" name="interest_payment_period">
+                                <input type="text" class="form-control" placeholder="Kỳ đóng lãi" name="interest_payment_period" value="{{ old('interest_payment_period') }}">
                                 @error('interest_payment_period')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
@@ -108,13 +108,13 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col"><label class="form-label">Lãi suất/tháng</label>
-                                <input type="text" class="form-control" placeholder="Lãi suất/tháng" name="interest_rate">
+                                <input type="text" class="form-control" placeholder="Lãi suất/tháng" name="interest_rate" value="{{ old('interest_rate') }}">
                                 @error('interest_rate')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                             </div>
                             <div class="col"><label class="form-label">Ngày trả</label>
-                                <input type="date" class="form-control" placeholder="Ngày trả" name="date_paid">
+                                <input type="date" class="form-control" placeholder="Ngày trả" name="date_paid" value="{{ old('date_paid') }}">
                                 @error('date_paid')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
