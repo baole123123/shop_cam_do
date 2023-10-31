@@ -101,9 +101,19 @@ class ContractController extends Controller
     public function show($id)
     {
         try {
+            $assets = Assets::get();
             $item = Contract::findOrFail($id);
-            SystemLog::addLog('Contract', 'store', $item->id);
-            return redirect()->route('contracts.index')->with('success', __('sys.store_item_success'));
+            $params = [
+                'assets' => $assets,
+                'item' => $item,
+                'success' => __('sys.store_item_success'),
+            ];
+            $type = [
+                0 => 'Cầm đồ',
+                1 => 'Trả góp'
+            ];
+            $params['type'] = $type; 
+            return view("admin.contracts.show", $params, $type);
         } catch (ModelNotFoundException $e) {
             Log::error($e->getMessage());
             return redirect()->route('contracts.index')->with('error', __('sys.store_item_error'));
