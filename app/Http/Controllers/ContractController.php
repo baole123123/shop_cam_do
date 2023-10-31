@@ -107,12 +107,13 @@ class ContractController extends Controller
                 'assets' => $assets,
                 'item' => $item,
                 'success' => __('sys.store_item_success'),
-                'loanTypes' => [
-                    1 => 'Cầm đồ',
-                    2 => 'Trả góp'
-                ]
             ];
-            return view("admin.contracts.show", $params);
+            $type = [
+                0 => 'Cầm đồ',
+                1 => 'Trả góp'
+            ];
+            $params['type'] = $type; 
+            return view("admin.contracts.show", $params, $type);
         } catch (ModelNotFoundException $e) {
             Log::error($e->getMessage());
             return redirect()->route('contracts.index')->with('error', __('sys.store_item_error'));
