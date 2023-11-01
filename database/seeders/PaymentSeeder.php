@@ -19,7 +19,8 @@ class PaymentSeeder extends Seeder
                 'other_fee' => 1,
                 'customer_name' => 'name',
                 'contract_id' => 1,
-                'user_id' => 1
+                'user_id' => 1,
+                'status' => 0
             ],
         ]);
     }

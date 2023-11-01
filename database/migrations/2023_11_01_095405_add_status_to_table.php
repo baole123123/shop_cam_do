@@ -12,8 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('contracts', function (Blueprint $table) {
-            // $table->renameColumn('identi', 'customer_identi');
-            // $table->renameColumn('birthday', 'customer_birthday');
+            $table->string('status');
         });
     }
 

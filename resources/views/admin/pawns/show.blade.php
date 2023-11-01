@@ -9,7 +9,7 @@
         <div class="d-flex flex-column justify-content-center">
         </div>
         <div class="d-flex align-content-center flex-wrap gap-3">
-            <a href="{{ route('contracts.index') }}" class="btn btn-label-secondary">Quay lại</a>
+            <a href="{{ route('pawns.index') }}" class="btn btn-label-secondary">Quay lại</a>
             <a href="#" class="btn btn-primary">Trả lãi</a>
         </div>
     </div>

@@ -22,13 +22,13 @@ class UpdateContractRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'customer_name' => 'required|regex:/^[a-zA-Z\s]+$/',
-            'customer_identi' => 'numeric|required|unique:contracts,customer_identi,'.$this->contract.'',
+            'customer_name' => 'required',
+            'customer_identi' => 'required|unique:contracts,customer_identi,'.$this->contract.'',
             'customer_birthday' => 'before:today|required',
             'total_loan' => 'required|numeric',
             'interest_payment_period' => 'required|numeric',
             'interest_rate' => 'required|numeric',
-            'date_paid' => 'after:today|required',
+            'date_paid' => 'required',
             'customer_phone' => 'required|digits:10|unique:contracts,customer_phone,'.$this->contract.'',
         ];
     }
@@ -47,7 +47,6 @@ class UpdateContractRequest extends FormRequest
             'interest_payment_period.numeric' => 'Bắt buộc phải nhập số',
             'interest_rate.required' => 'Không được để trống trường này',
             'interest_rate.numeric' => 'Bắt buộc phải nhập số',
-            'date_paid.after' => 'Ngày trả không hợp lệ',
             'date_paid.required' => 'Không được để trống trường này',
             'customer_phone.required' => 'Không được để trống trường này',
             'customer_phone.digits' => 'Số điện thoại không hợp lệ',

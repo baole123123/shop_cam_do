@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('contracts', function (Blueprint $table) {
-            // $table->renameColumn('identi', 'customer_identi');
-            // $table->renameColumn('birthday', 'customer_birthday');
+        Schema::table('customers', function (Blueprint $table) {
+            $table->string('email')->nullable()->change();
         });
     }
 
@@ -22,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('contracts', function (Blueprint $table) {
+        Schema::table('customer', function (Blueprint $table) {
             //
         });
     }
