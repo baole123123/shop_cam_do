@@ -63,10 +63,13 @@
       <div class="dropdown-divider"></div>
     </li>
     <li>
-      <a class="dropdown-item" href="auth-login-cover.html" target="_blank">
-        <i class="bx bx-power-off me-2"></i>
-        <span class="align-middle">Log Out</span>
-      </a>
+        <form action="{{route('logout')}}" method="POST">
+            @csrf
+            <button class="dropdown-item">
+                <i class="bx bx-power-off me-2"></i>
+                <span class="align-middle">Log Out</span>
+            </button>
+        </form>
     </li>
   </ul>
 </li>
