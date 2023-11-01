@@ -10,7 +10,8 @@
         <!-- Alert -->
         @include('admin.includes.global.alert')
         <!-- Form search -->
-        <form action="{{ route('contracts.index') }}" method="get">
+        <form action="{{ route('contracts.index') }}" method="get" enctype="multipart/form-data">
+            @csrf
             <div class="card-header">
                 <div class="row">
                     <div class="col">
