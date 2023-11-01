@@ -34,4 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::get('asset/edit/{id}', [\App\Http\Controllers\AssetController::class, 'edit'])->name('asset.edit');
     Route::put('asset/update/{id}', [\App\Http\Controllers\AssetController::class, 'update'])->name('asset.update');
     Route::delete('asset/destroy/{id}', [\App\Http\Controllers\AssetController::class, 'destroy'])->name('asset.destroy');
+
+    // funds
+    Route::get('funds', [\App\Http\Controllers\FundController::class, 'index'])->name('funds.index');
 });

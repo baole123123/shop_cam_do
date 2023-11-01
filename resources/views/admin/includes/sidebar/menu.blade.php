@@ -73,6 +73,12 @@
             </li>
         </ul>
     </li>
+    <li class="menu-item <?= Request::is('funds*') ? 'active' : '' ?>">
+        <a href="{{route('funds.index')}}" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-layout"></i>
+            <div class="text-truncate">Quản lý quỹ</div>
+        </a>
+    </li>
     <li class="menu-item">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
             <i class="menu-icon tf-icons bx bx-layout"></i>
