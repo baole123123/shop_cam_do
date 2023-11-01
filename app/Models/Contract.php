@@ -37,4 +37,8 @@ class Contract extends Model
         $dueDate = Carbon::parse($this->date_paid)->startOfDay();
         return $currentDate->isAfter($dueDate);
     }
+
+    public function asset() {
+        return $this->hasOne(Asset::class,'contract_id','id');
+    }
 }

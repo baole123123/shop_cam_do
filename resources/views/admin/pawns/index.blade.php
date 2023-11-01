@@ -2,7 +2,7 @@
 
 @section('content')
     <h4 class="py-3 mb-4">
-        <span class="text-muted fw-light">Trang chủ /</span> Cầm Đồ
+        <span class="text-muted fw-light">Trang chủ /</span> Trả góp
     </h4>
 
     <!-- Product List Table -->
@@ -10,7 +10,7 @@
         <!-- Alert -->
         @include('admin.includes.global.alert')
         <!-- Form search -->
-        <form action="{{ route('contracts.index') }}" method="get" enctype="multipart/form-data">
+        <form action="{{ route('pawns.index') }}" method="get" enctype="multipart/form-data">
             @csrf
             <div class="card-header">
                 <div class="row">
@@ -68,7 +68,7 @@
                                 </div>
                             </div>
                             <div class="col">
-                                <a href="{{ route('contracts.create') }}" class="btn btn-primary">
+                                <a href="{{ route('pawns.create') }}" class="btn btn-primary">
                                     <i class="bx bx-plus"></i> @lang('sys.add_new')
                                 </a>
                             </div>
@@ -100,13 +100,9 @@
                                 <td>{{ $index + 1 }}</td>
                                 <td>
                                     <div class="d-flex">
-                                        <div class="avatar me-1">
-                                            <img src="{{ asset($item->customer_image) }}" class="rounded-2">
-                                        </div>
                                         <div class="td-info">
                                             <h6 class="text-body mb-0">{{ $item->customer_name }}</h6>
-                                            <small
-                                                class="text-muted text-truncate d-none d-sm-block">{{ $item->customer_phone }}</small>
+                                            <small  class="text-muted text-truncate d-none d-sm-block">{{ $item->customer_phone }}</small>
                                         </div>
                                     </div>
                                 </td>
@@ -126,11 +122,11 @@
                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
                                             data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="{{ route('contracts.edit', $item->id) }}"><i
+                                            <a class="dropdown-item" href="{{ route('pawns.edit', $item->id) }}"><i
                                                     class="bx bx-edit-alt me-1"></i> Edit</a>
-                                            <a class="dropdown-item" href="{{ route('contracts.show', $item->id) }}"><i
+                                            <a class="dropdown-item" href="{{ route('pawns.show', $item->id) }}"><i
                                                     class='bx bx-show-alt'></i> Show</a>
-                                            <form action="{{ route('contracts.destroy', $item->id) }}" method="post">
+                                            <form action="{{ route('pawns.destroy', $item->id) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="dropdown-item"><i class="bx bx-trash me-1"></i>
