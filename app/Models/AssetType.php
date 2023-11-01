@@ -5,9 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Contract extends Model
+class AssetType extends Model
 {
     use HasFactory;
-    const CAMDO = 0;
-    const TRAGOP = 1;
 }
