@@ -27,12 +27,12 @@
                     </select>
                 </div>
                 <div class="col">
-                    <select id="ProductStatus" class="form-select text-capitalize">
+                    <select id="ProductStatus" class="form-select text-capitalize" name="time">
                         <option value="">Thời gian</option>
-                        <option value="dang_vay">Đang vay</option>
-                        <option value="du_lai">Đủ lãi</option>
-                        <option value="no">Nợ</option>
-                        <option value="qua_han">Quá hạn</option>
+                        <option value="tat_ca">Tất cả</option>
+                        <option value="tuan_nay">Tuần này</option>
+                        <option value="thang_nay">Tháng này</option>
+                        <option value="nam_nay">Năm này</option>
                     </select>
                 </div>
                 <div class="col-md-1">
@@ -120,7 +120,11 @@
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="{{ route('contracts.edit',$item->id)}}"><i class="bx bx-edit-alt me-1"></i> Edit</a>
                                     <a class="dropdown-item" href="{{ route('contracts.show',$item->id)}}"><i class='bx bx-show-alt'></i> Show</a>
-                                    <a class="dropdown-item" href="{{ route('contracts.destroy',$item->id)}}"><i class="bx bx-trash me-1"></i> Delete</a>
+                                    <form action="{{ route('contracts.destroy',$item->id)}}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="dropdown-item"><i class="bx bx-trash me-1"></i> Delete</button>
+                                    </form>
                                 </div>
                             </div>
                         </td>
