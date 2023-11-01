@@ -146,8 +146,15 @@ class CustomerController extends Controller
 
     public function show($id)
     {
-        $customer = Customer::find($id);
-
-        return view('admin.customers.show', compact('customer'));
+         try {
+        $item = Customer::findOrFail($id);
+        $params = [
+            'item' => $item
+        ];
+        return view("admin.customers.show", $params);
+    } catch (ModelNotFoundException $e) {
+        Log::error($e->getMessage());
+        return redirect()->route('customers.index')->with('error', __('sys.item_not_found'));
+    }
     }
 }
