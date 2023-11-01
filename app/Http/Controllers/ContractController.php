@@ -138,7 +138,7 @@ class ContractController extends Controller
     public function show($id)
     {
         try {
-            $assets = Asset::get();
+            $assets = AssetType::get();
             $item = Contract::findOrFail($id);
             $params = [
                 'assets' => $assets,
@@ -158,10 +158,12 @@ class ContractController extends Controller
     public function edit($id)
     {
         try {
-            $assets = Asset::get();
+            $asset_types = AssetType::get();
             $item = Contract::findOrFail($id);
+            $asset = $item->asset;
             $params = [
-                'assets' => $assets,
+                'asset_types' => $asset_types,
+                'asset' => $asset,
                 'item' => $item
             ];
             return view("admin.contracts.edit", $params);
@@ -172,8 +174,8 @@ class ContractController extends Controller
     }
     public function update(UpdateContractRequest $request, $id)
     {
-            $item = Contract::findOrFail($id);
-            $item->customer_id = 1;
+        $item = Contract::findOrFail($id);
+        $item->customer_id = 1;
         $item->contract_type_id = Contract::CAMDO;
         $item->customer_phone = $request->customer_phone;
         $item->customer_name = $request->customer_name;
@@ -189,12 +191,10 @@ class ContractController extends Controller
         $item->date_paid = $request->date_paid;
         $item->note = $request->note;
         if ($item->isOverdue()) {
-            $item->status = 'Đã quá hạn';
+            $item->status = 'da_qua_han';
         } else {
-            $item->status = 'Đang vay';
+            $item->status = 'dang_vay';
         }
-        
-        
         
         try {
 
@@ -207,12 +207,16 @@ class ContractController extends Controller
 
                 $request->customer_id = $customer->id;
             }
+
             $item->customer_id = $request->customer_id;
             $item->save();
 
-
             // xử lý thêm tài sản
-            $asset = new Asset();
+            if (empty($item->asset)) {
+                $asset = new Asset();
+            } else {
+                $asset = $item->asset;
+            }
             $asset->contract_id = $item->id;
             $asset->asset_type_id = $request->asset_type_id;
             $asset->name = $request->asset_imei;
@@ -227,14 +231,16 @@ class ContractController extends Controller
                 }
                 $item->image = json_encode($images);
             }
-           
+        
             $asset->save();
-                SystemLog::addLog('Contract', 'store', $item->id);
-                return redirect()->route('contracts.index')->with('success', __('sys.update_item_success'));
-            } catch (QueryException $e) {
-                Log::error($e->getMessage());
-                return redirect()->route('contracts.index')->with('error', __('sys.update_item_error'));
-            }
+
+
+            SystemLog::addLog('Contract', 'store', $item->id);
+            return redirect()->route('contracts.index')->with('success', __('sys.update_item_success'));
+        } catch (QueryException $e) {
+            Log::error($e->getMessage());
+            return redirect()->route('contracts.index')->with('error', __('sys.update_item_error'));
+        }
     }
     public function destroy($id)
     {

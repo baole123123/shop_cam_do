@@ -81,10 +81,10 @@
                                 <div class="col">
                                     <label class="form-label">Tài sản thế chấp</label>
                                     <select name="asset_type_id" class="form-select">
-                                        @foreach ($assets as $asset)
-                                            <option <?= $asset->id == $item->asset_id ? 'selected' : '' ?>
-                                                value="{{ $asset->id }}">
-                                                {{ $asset->name }}</option>
+                                        @foreach ($asset_types as $asset_type)
+                                            <option <?= $asset_type->id == $item->asset_type_id ? 'selected' : '' ?>
+                                                value="{{ $asset_type->id }}">
+                                                {{ $asset_type->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
