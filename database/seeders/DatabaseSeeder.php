@@ -20,6 +20,8 @@ class DatabaseSeeder extends Seeder
             ContractSeeder::class,
             ExpenseSeeder::class,
             PaymentSeeder::class,
+            FundSeeder::class,
+            AssetTypeSeeder::class,
         ]);
     }
 }

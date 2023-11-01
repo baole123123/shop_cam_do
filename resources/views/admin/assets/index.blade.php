@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Assets;
+use App\Models\Asset;
 ?>
 
 @extends('admin.layouts.master')
@@ -26,8 +26,8 @@ use App\Models\Assets;
                 <div class="col">
                     <select name="status" class="form-select text-capitalize">
                         <option value="">Trạng thái</option>
-                        <option value="<?= Assets::_CAM_CO ?>" {{ request()->input('status') == Assets::_CAM_CO ? 'selected' : '' }}><?= Assets::getDescStatus(Assets::_CAM_CO) ?></option>
-                        <option value="<?= Assets::_DA_TRA ?>" {{ request()->input('status') == Assets::_DA_TRA ? 'selected' : '' }}><?= Assets::getDescStatus(Assets::_DA_TRA) ?></option>
+                        <option value="<?= Asset::_CAM_CO ?>" {{ request()->input('status') == Asset::_CAM_CO ? 'selected' : '' }}><?= Asset::getDescStatus(Asset::_CAM_CO) ?></option>
+                        <option value="<?= Asset::_DA_TRA ?>" {{ request()->input('status') == Asset::_DA_TRA ? 'selected' : '' }}><?= Asset::getDescStatus(Asset::_DA_TRA) ?></option>
                     </select>
                 </div>
                 <div class="col-md-1">
@@ -58,7 +58,7 @@ use App\Models\Assets;
                         <td>{{ $loop->index + 1 + ($items->perPage() * ($items->currentPage() - 1)) }}</td>
                         <td>{{ $item->name }}</td>
                         <td>{{ $item->contract_id }}</td>
-                        <td>{{ Assets::getDescStatus($item->status) }}</td>
+                        <td>{{ Asset::getDescStatus($item->status) }}</td>
                         <td>
                             <div class="dropdown">
                                 <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>

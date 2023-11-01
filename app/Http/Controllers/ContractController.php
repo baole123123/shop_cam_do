@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
-use App\Models\Assets;
-use App\Models\Contracts;
+use App\Models\AssetType;
+use App\Models\Contract;
 use App\Models\Log as SystemLog;
 use App\Http\Requests\StoreContractRequest;
 use App\Http\Requests\UpdateContractRequest;
@@ -17,9 +17,11 @@ use Illuminate\Http\Request;
 class ContractController extends Controller
 {
     use UploadFileTrait;
+    // Trả góp
     public function index(Request $request)
     {
-        $query = Contracts::select('*');
+        $query = Contract::select('*');
+        $query->contract_type_id = Contract::CAMDO;
         $query->orderBy('id', 'DESC');
         $limit = $request->limit ? $request->limit : 10;
         if ( $request->status_name) {
@@ -50,7 +52,7 @@ class ContractController extends Controller
     }
     public function create()
     {
-        $assets = Assets::get();
+        $assets = AssetType::get();
         $customers = Customer::get();
         $params = [
             'assets' => $assets,
@@ -109,8 +111,8 @@ class ContractController extends Controller
     public function show($id)
     {
         try {
-            $assets = Assets::get();
-            $item = Contracts::findOrFail($id);
+            $assets = Asset::get();
+            $item = Contract::findOrFail($id);
             $params = [
                 'assets' => $assets,
                 'item' => $item,
@@ -129,8 +131,8 @@ class ContractController extends Controller
     public function edit($id)
     {
         try {
-            $assets = Assets::get();
-            $item = Contracts::findOrFail($id);
+            $assets = Asset::get();
+            $item = Contract::findOrFail($id);
             $params = [
                 'assets' => $assets,
                 'item' => $item
