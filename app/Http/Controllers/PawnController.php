@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
-use App\Models\AssetType;
+use App\Models\Asset;
 use App\Models\Contract;
 use App\Models\Log as SystemLog;
 use App\Http\Requests\StoreContractRequest;
@@ -14,14 +14,14 @@ use Illuminate\Database\QueryException;
 use App\Traits\UploadFileTrait;
 use Illuminate\Http\Request;
 
-class ContractController extends Controller
+class PawnController extends Controller
 {
     use UploadFileTrait;
     // Trả góp
     public function index(Request $request)
     {
         $query = Contract::select('*');
-        $query->contract_type_id = Contract::CAMDO;
+        $query->contract_type_id = Contract::TRAGOP;
         $query->orderBy('id', 'DESC');
         $limit = $request->limit ? $request->limit : 10;
         if ($request->name_phone) {
@@ -49,7 +49,7 @@ class ContractController extends Controller
     }
     public function create()
     {
-        $assets = AssetType::get();
+        $assets = Asset::get();
         $customers = Customer::get();
         $params = [
             'assets' => $assets,

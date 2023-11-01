@@ -24,6 +24,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('customers', \App\Http\Controllers\CustomerController::class);
     Route::resource('contracts', \App\Http\Controllers\ContractController::class);
+    Route::resource('pawns', \App\Http\Controllers\PawnController::class);
     Route::resource('users', \App\Http\Controllers\UserController::class);
 
     Route::get('logs', [\App\Http\Controllers\LogController::class, 'index'])->name('logs.index');;

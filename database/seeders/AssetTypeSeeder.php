@@ -13,7 +13,7 @@ class AssetTypeSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('funds')->insert([
+        DB::table('asset_types')->insert([
             [
                 'name' => 'Iphone 15',
                 'status' => 1

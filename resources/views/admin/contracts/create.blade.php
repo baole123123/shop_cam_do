@@ -71,19 +71,12 @@
                         <div class="card-body">
                             <div class="row mb-3">
                                 <div class="col">
-                                <label class="form-label">Tài sản thế chấp</label>
-                                <select name="asset_id" class="form-select">
-                                    <option value="">Vui lòng chọn</option>
-                                    @foreach($assets as $index => $asset)
-                                        <option value="{{ $asset->id }}">{{ $asset->name }}</option>
-                                    @endforeach
-                                </select>
-                                </div>
-                                <div class="col"><label class="form-label">Loại hợp đồng</label>
-                                    <select name="contract_type_id" class="form-select">
+                                    <label class="form-label">Tài sản thế chấp</label>
+                                    <select name="asset_type_id" class="form-select">
                                         <option value="">Vui lòng chọn</option>
-                                        <option value="0">Cầm đồ</option>
-                                        <option value="1">Trả góp</option>
+                                        @foreach($assets as $index => $asset)
+                                            <option value="{{ $asset->id }}">{{ $asset->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -118,11 +111,43 @@
                             <div class="row mb-3">
                                 <div class="col">
                                     <label class="form-label">Ghi chú</label>
-                                        <textarea name="note" class="form-control" placeholder="Ghi chú" cols="30" rows="5"></textarea>
+                                    <textarea name="note" class="form-control" placeholder="Ghi chú" ></textarea>
                                 </div>
                                 <div class="col">
                                     <label class="form-label">Ảnh đính kèm</label>
                                         <input type="file" name="images[]" multiple class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0 card-title">Thông tin tài sản thế chấp</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label class="label-control">IMEI</label>
+                                        <input type="text" name="asset_imei" class="form-control" value="">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="label-control">Mật khẩu</label>
+                                    <input type="text" name="asset_password" class="form-control" value="">
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="label-control">Số máy</label>
+                                    <input type="text" name="asset_number" class="form-control" value="">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="label-control">Ghi chú</label>
+                                    <textarea name="asset_number" class="form-control"></textarea>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Ảnh </label>
+                                    <input type="file" name="asset_images" class="form-control">
                                 </div>
                             </div>
                         </div>
