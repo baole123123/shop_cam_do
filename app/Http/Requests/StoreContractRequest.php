@@ -22,8 +22,8 @@ class StoreContractRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'customer_name' => 'required|regex:/^[a-zA-Z\s]+$/',
-            'customer_identi' => 'numeric|required|unique:contracts',
+            'customer_name' => 'required',
+            'customer_identi' => 'required|unique:contracts',
             'customer_birthday' => 'before:today|required',
             'total_loan' => 'required|numeric',
             'interest_payment_period' => 'required|numeric',
