@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Assets;
+use App\Models\Asset;
 use App\Models\Contract;
 use Illuminate\Http\Request;
 use App\Models\Log as SystemLog;
@@ -21,7 +21,7 @@ class AssetController extends Controller
     public function index(Request $request)
     {
         $paginate = 10;
-        $query = Assets::select('*');
+        $query = Asset::select('*');
         if (isset($request->name)) {
             $query->where('name', 'LIKE', "%$request->name%");
         }
@@ -47,7 +47,7 @@ class AssetController extends Controller
 
     public function store(StoreAssetRequest $request)
     {
-        $item = new Assets();
+        $item = new Asset();
         $item->name = $request->name;
         $item->asset_type_id = $request->asset_type_id;
         $item->status = $request->status;
@@ -71,7 +71,7 @@ class AssetController extends Controller
 
         try {
             $item->save();
-            SystemLog::addLog('Assets', 'store', $item->id);
+            SystemLog::addLog('Asset', 'store', $item->id);
             return redirect()->route('asset.index')->with('success', __('sys.store_item_success'));
         } catch (QueryException $e) {
             if ($item->images) {
@@ -85,7 +85,7 @@ class AssetController extends Controller
     public function show(string $id)
     {
         try {
-            $item = Assets::findOrFail($id);
+            $item = Asset::findOrFail($id);
             $params = [
                 'item' => $item
             ];
@@ -99,7 +99,7 @@ class AssetController extends Controller
     public function edit(string $id)
     {
         try {
-            $item = Assets::findOrFail($id);
+            $item = Asset::findOrFail($id);
             $params = [
                 'item' => $item
             ];
@@ -113,7 +113,7 @@ class AssetController extends Controller
     public function update(UpdateAssetRequest $request, string $id)
     {
         try {
-            $item = Assets::findOrFail($id);
+            $item = Asset::findOrFail($id);
             // Save to fields
             $item->name = $request->name;
             $item->asset_type_id = $request->asset_type_id;
@@ -136,7 +136,7 @@ class AssetController extends Controller
             }
 
             $item->save();
-            SystemLog::addLog('Assets', 'update', $item->id);
+            SystemLog::addLog('Asset', 'update', $item->id);
             return redirect()->route('asset.index')->with('success', __('sys.update_item_success'));
         } catch (\ModelNotFoundException $e) {
             Log::error($e->getMessage());
@@ -150,9 +150,9 @@ class AssetController extends Controller
     public function destroy(string $id)
     {
         try {
-            $item = Assets::findOrFail($id);
+            $item = Asset::findOrFail($id);
             $item->delete();
-            SystemLog::addLog('Assets', 'destroy', $item->id);
+            SystemLog::addLog('Asset', 'destroy', $item->id);
             return redirect()->route('asset.index')->with('success', __('sys.destroy_item_success'));
         } catch (ModelNotFoundException $e) {
             Log::error($e->getMessage());

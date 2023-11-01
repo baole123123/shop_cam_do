@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
-use App\Models\Assets;
+use App\Models\Asset;
 use App\Models\Contract;
 use App\Models\Log as SystemLog;
 use App\Http\Requests\StoreContractRequest;
@@ -47,7 +47,7 @@ class ContractController extends Controller
     }
     public function create()
     {
-        $assets = Assets::get();
+        $assets = Asset::get();
         $customers = Customer::get();
         $params = [
             'assets' => $assets,
@@ -101,7 +101,7 @@ class ContractController extends Controller
     public function show($id)
     {
         try {
-            $assets = Assets::get();
+            $assets = Asset::get();
             $item = Contract::findOrFail($id);
             $params = [
                 'assets' => $assets,
@@ -122,7 +122,7 @@ class ContractController extends Controller
     public function edit($id)
     {
         try {
-            $assets = Assets::get();
+            $assets = Asset::get();
             $item = Contract::findOrFail($id);
             $params = [
                 'assets' => $assets,

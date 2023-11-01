@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Assets;
+use App\Models\Asset;
 ?>
 @extends('admin.layouts.master')
 @section('content')
@@ -46,10 +46,10 @@ use App\Models\Assets;
                     <tr>
                         <td><strong>Trạng thái</strong></td>
                         <td>
-                            @if($item->status == Assets::_CAM_CO)
-                            <?= Assets::getDescStatus(Assets::_CAM_CO) ?>
-                            @elseif ($item->status == Assets::_DA_TRA)
-                            <?= Assets::getDescStatus(Assets::_DA_TRA) ?>
+                            @if($item->status == Asset::_CAM_CO)
+                            <?= Asset::getDescStatus(Asset::_CAM_CO) ?>
+                            @elseif ($item->status == Asset::_DA_TRA)
+                            <?= Asset::getDescStatus(Asset::_DA_TRA) ?>
                             @endif
                         </td>
                         <td><strong>Mã hợp đồng</strong></td>
