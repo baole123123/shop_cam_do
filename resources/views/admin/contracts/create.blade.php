@@ -101,8 +101,8 @@
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                                 </div>
-                                <div class="col"><label class="form-label">Ngày trả</label>
-                                    <input type="date" class="form-control" placeholder="Ngày trả" name="date_paid" value="{{ old('date_paid') }}">
+                                <div class="col"><label class="form-label">Ngày vay</label>
+                                    <input type="date" class="form-control" placeholder="Ngày vay" name="date_paid" value="{{ old('date_paid') }}">
                                     @error('date_paid')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
