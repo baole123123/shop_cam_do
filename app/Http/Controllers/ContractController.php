@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Payments;
 use App\Models\Customer;
 use App\Models\AssetType;
 use App\Models\Contract;
@@ -70,7 +71,7 @@ class ContractController extends Controller
      */
     public function store(StoreContractRequest $request)
     {
-        $item = new Contracts();
+        $item = new Contract();
         $item->customer_id = 1;
         $item->customer_phone = $request->customer_phone;
         $item->customer_name = $request->customer_name;
@@ -85,6 +86,8 @@ class ContractController extends Controller
         $item->date_paid = $request->date_paid;
         $item->note = $request->note;
         $item->status = 'dang_vay';
+        $item->asset_id = 1;
+        $item->contract_type_id = 1;
         if ($request->hasFile('images')) {
             $images = [];
             foreach ($request->file('images') as $image) {
@@ -95,8 +98,23 @@ class ContractController extends Controller
         if ($request->hasFile('customer_image')) {
             $item->customer_image = $this->uploadFile($request->file('customer_image'), 'uploads');
         }
+
         try {
-            $item->save();
+            if ($item->save()) {
+                $timestamp_date_paid = strtotime($request->date_paid);
+                $amount_payment = ceil(($request->total_loan + $request->interest_rate) / $request->interest_payment_period);
+                for ($i = 1; $i <= $request->interest_payment_period; $i++) { 
+                    $item_payment = new Payments();
+                    $item_payment->date_paid = date('Y-m-d', ($timestamp_date_paid + ($i * $request->interest_payment_period * 24 * 60 * 60)));
+                    $item_payment->amount = $amount_payment;
+                    $item_payment->other_fee = 1;
+                    $item_payment->customer_name = $request->customer_name;
+                    $item_payment->contract_id = $item->id;
+                    $item_payment->user_id = 1;
+                    $item_payment->status = Payments::_DONG_LAI;
+                    $item_payment->save();
+                }
+            }
             SystemLog::addLog('Contract', 'store', $item->id);
             return redirect()->route('contracts.index')->with('success', __('sys.store_item_success'));
         } catch (QueryException $e) {
