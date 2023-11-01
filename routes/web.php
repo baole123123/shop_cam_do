@@ -23,6 +23,7 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', [App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
     Route::resource('customers', \App\Http\Controllers\CustomerController::class);
+    Route::get('contracts/overdue', [\App\Http\Controllers\ContractController::class, 'overdue'])->name('contracts.overdue');
     Route::resource('contracts', \App\Http\Controllers\ContractController::class);
     Route::resource('users', \App\Http\Controllers\UserController::class);
 

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use App\Models\Assets;
-use App\Models\Contract;
+use App\Models\Contracts;
 use App\Models\Log as SystemLog;
 use App\Http\Requests\StoreContractRequest;
 use App\Http\Requests\UpdateContractRequest;
@@ -19,9 +19,12 @@ class ContractController extends Controller
     use UploadFileTrait;
     public function index(Request $request)
     {
-        $query = Contract::select('*');
+        $query = Contracts::select('*');
         $query->orderBy('id', 'DESC');
         $limit = $request->limit ? $request->limit : 10;
+        if ( $request->status_name) {
+            $query->where('status', 'LIKE', "%$request->status_name%");
+        }
         if ($request->name_phone) {
             $query->where('customer_name', 'LIKE', "%$request->name_phone%")
                 ->orWhere('customer_phone', 'LIKE', "%$request->name_phone%");
@@ -34,7 +37,7 @@ class ContractController extends Controller
                 'nam_nay' => [date("Y-01-01"), date("Y-12-31")]
             ];
             [$startDate, $endDate] = $dateRanges[$request->time];
-            $query = Contract::query();
+            $query = Contracts::query();
             if ($startDate && $endDate) {
                 $query->whereBetween('created_at', [$startDate, $endDate]);
             }
@@ -51,7 +54,11 @@ class ContractController extends Controller
         $customers = Customer::get();
         $params = [
             'assets' => $assets,
-            'customers' => $customers
+            'customers' => $customers,
+            'type' => [
+                    0 => 'Cầm đồ',
+                    1 => 'Trả góp'
+            ],
         ];
         return view("admin.contracts.create", $params);
     }
@@ -61,7 +68,7 @@ class ContractController extends Controller
      */
     public function store(StoreContractRequest $request)
     {
-        $item = new Contract();
+        $item = new Contracts();
         $item->customer_id = 1;
         $item->customer_phone = $request->customer_phone;
         $item->customer_name = $request->customer_name;
@@ -75,6 +82,7 @@ class ContractController extends Controller
         $item->interest_rate = $request->interest_rate;
         $item->date_paid = $request->date_paid;
         $item->note = $request->note;
+        $item->status = 'dang_vay';
         if ($request->hasFile('images')) {
             $images = [];
             foreach ($request->file('images') as $image) {
@@ -102,18 +110,17 @@ class ContractController extends Controller
     {
         try {
             $assets = Assets::get();
-            $item = Contract::findOrFail($id);
+            $item = Contracts::findOrFail($id);
             $params = [
                 'assets' => $assets,
                 'item' => $item,
                 'success' => __('sys.store_item_success'),
+                'type' => [
+                    0 => 'Cầm đồ',
+                    1 => 'Trả góp'
+                ]
             ];
-            $type = [
-                0 => 'Cầm đồ',
-                1 => 'Trả góp'
-            ];
-            $params['type'] = $type; 
-            return view("admin.contracts.show", $params, $type);
+            return view("admin.contracts.show", $params);
         } catch (ModelNotFoundException $e) {
             Log::error($e->getMessage());
             return redirect()->route('contracts.index')->with('error', __('sys.store_item_error'));
@@ -123,7 +130,7 @@ class ContractController extends Controller
     {
         try {
             $assets = Assets::get();
-            $item = Contract::findOrFail($id);
+            $item = Contracts::findOrFail($id);
             $params = [
                 'assets' => $assets,
                 'item' => $item
@@ -136,7 +143,7 @@ class ContractController extends Controller
     }
     public function update(UpdateContractRequest $request, $id)
     {
-            $item = Contract::findOrFail($id);
+            $item = Contracts::findOrFail($id);
             $item->customer_id = 1;
             $item->customer_phone = $request->customer_phone;
             $item->customer_name = $request->customer_name;
@@ -150,6 +157,11 @@ class ContractController extends Controller
             $item->interest_rate = $request->interest_rate;
             $item->date_paid = $request->date_paid;
             $item->note = $request->note;
+            if ($item->isOverdue()) {
+                $item->status = 'Đã quá hạn';
+            } else {
+                $item->status = 'Đang vay';
+            }
             if ($request->hasFile('images')) {
                 $images = [];
                 foreach ($request->file('images') as $image) {
@@ -172,7 +184,7 @@ class ContractController extends Controller
     public function destroy($id)
     {
         try {
-            $item = Contract::findOrFail($id);
+            $item = Contracts::findOrFail($id);
             $item->delete();
             SystemLog::addLog('Contract', 'destroy', $item->id);
             return redirect()->route('contracts.index')->with('success', __('sys.destroy_item_success'));
@@ -183,5 +195,36 @@ class ContractController extends Controller
             Log::error($e->getMessage());
             return redirect()->route('contracts.index')->with('error', __('sys.destroy_item_error'));
         }
+    }
+    public function overdue(Request $request)
+    {
+        $query = Contracts::select('*')->where('status', 'Đã quá hạn');
+        $query->orderBy('id', 'DESC');
+        $limit = $request->limit ? $request->limit : 10;
+        if ($request->name_phone) {
+            $query->where('customer_name', 'LIKE', "%$request->name_phone%")
+                ->orWhere('customer_phone', 'LIKE', "%$request->name_phone%");
+        }
+        if ($request->time && in_array($request->time, ['tat_ca', 'tuan_nay', 'thang_nay', 'nam_nay'])) {
+            $dateRanges = [
+                'tat_ca' => [null, null],
+                'tuan_nay' => [date("Y-m-d", strtotime("this week")), date("Y-m-d", strtotime("this week +6 days"))],
+                'thang_nay' => [date("Y-m-01"), date("Y-m-t")],
+                'nam_nay' => [date("Y-01-01"), date("Y-12-31")]
+            ];
+            [$startDate, $endDate] = $dateRanges[$request->time];
+            $query = Contracts::query();
+            if ($startDate && $endDate) {
+                $query->whereBetween('created_at', [$startDate, $endDate]);
+            }
+        }
+        if ( $request->status_name) {
+            $query->where('status', 'LIKE', "%$request->status_name%");
+        }
+        $items = $query->paginate($limit);
+        $params = [
+            'items' => $items
+        ];
+        return view("admin.contracts.overdue", $params);
     }
 }

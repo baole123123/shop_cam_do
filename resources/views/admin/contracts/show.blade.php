@@ -73,7 +73,7 @@
                                 </tr>
                                 <tr>
                                     <th width="50%">Loại hợp đồng</th>
-                                    <td>{{ $type[$item->contract_type_id] }}</td>
+                                    <td>{{ $type[$item->contract_type_id]}}</td>
                                 </tr>
                                 <tr>
                                     <th width="50%">Tổng tiền vay</th>
@@ -94,6 +94,10 @@
                                 <tr>
                                     <th width="50%">Ghi chú</th>
                                     <td>{{ $item->note }}</td>
+                                </tr>
+                                <tr>
+                                    <th width="50%">Trạng thái</th>
+                                    <td>{{ $item->status }}</td>
                                 </tr>
                                 <tr>
                                     <th width="50%">Ảnh đính kèm</th>

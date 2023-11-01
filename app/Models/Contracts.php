@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Contracts extends Model
 {
@@ -28,4 +29,10 @@ class Contracts extends Model
     ];
 
     public $timestamps = true;
+    public function isOverdue()
+    {
+        $currentDate = Carbon::now();
+        $dueDate = Carbon::parse($this->date_paid)->startOfDay();
+        return $currentDate->isAfter($dueDate);
+    }
 }
