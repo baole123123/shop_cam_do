@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Payments;
 use App\Models\Customer;
 use App\Models\AssetType;
 use App\Models\Asset;
@@ -104,8 +105,23 @@ class ContractController extends Controller
                 $request->customer_id = $customer->id;
             }
             $item->customer_id = $request->customer_id;
-            $item->save();
-
+            
+            // thêm các kỳ đóng lãi
+            if ($item->save()) {
+                $timestamp_date_paid = strtotime($request->date_paid);
+                $amount_payment = ceil(($request->total_loan + $request->interest_rate) / $request->interest_payment_period);
+                for ($i = 1; $i <= $request->interest_payment_period; $i++) { 
+                    $item_payment = new Payments();
+                    $item_payment->date_paid = date('Y-m-d', ($timestamp_date_paid + ($i * $request->interest_payment_period * 24 * 60 * 60)));
+                    $item_payment->amount = $amount_payment;
+                    $item_payment->other_fee = 1;
+                    $item_payment->customer_name = $request->customer_name;
+                    $item_payment->contract_id = $item->id;
+                    $item_payment->user_id = 1;
+                    $item_payment->status = Payments::_DONG_LAI;
+                    $item_payment->save();
+                }
+            }
 
             // xử lý thêm tài sản
             $asset = new Asset();

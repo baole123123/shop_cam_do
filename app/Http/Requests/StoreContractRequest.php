@@ -30,6 +30,7 @@ class StoreContractRequest extends FormRequest
             'interest_rate' => 'required|numeric',
             'date_paid' => 'required',
             'customer_phone' => 'required|digits:10|unique:contracts',
+            'contract_type_id' => 'required',
         ];
     }
     public function messages() {
@@ -51,6 +52,7 @@ class StoreContractRequest extends FormRequest
             'customer_phone.required' => 'Không được để trống trường này',
             'customer_phone.digits' => 'Số điện thoại không hợp lệ',
             'customer_phone.unique' => 'Số điện thoại đã tồn tại',
+            'contract_type_id.required' => 'Loại hợp đồng là bắt buộc',
         ];
     }
 }
