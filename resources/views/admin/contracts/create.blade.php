@@ -113,10 +113,7 @@
                                     <label class="form-label">Ghi chú</label>
                                     <textarea name="note" class="form-control" placeholder="Ghi chú" ></textarea>
                                 </div>
-                                <div class="col">
-                                    <label class="form-label">Ảnh đính kèm</label>
-                                        <input type="file" name="images[]" multiple class="form-control">
-                                </div>
+                               
                             </div>
                         </div>
                     </div>
@@ -143,11 +140,11 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label class="label-control">Ghi chú</label>
-                                    <textarea name="asset_number" class="form-control"></textarea>
+                                    <textarea name="asset_note" class="form-control"></textarea>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label">Ảnh </label>
-                                    <input type="file" name="asset_images" class="form-control">
+                                    <label class="form-label">Ảnh đính kèm</label>
+                                        <input type="file" name="images[]" multiple class="form-control">
                                 </div>
                             </div>
                         </div>
