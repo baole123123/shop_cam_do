@@ -27,6 +27,7 @@ class ContractSeeder extends Seeder
                 'date_paid' => '2020-12-21',
                 'note' => '',
                 'image' => '',
+                'status' => 'dang_vay',
                 'user_id' => 1
             ],
         ]);

@@ -8,18 +8,18 @@
     </li>
     <li class="menu-item">
         <a href="#" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+            <i class="menu-icon tf-icons bx bx-receipt"></i>
             <div class="text-truncate">Nợ phải thu</div>
         </a>
     </li>
     <li class="menu-item">
-        <a href="#" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+        <a href="{{route('contracts.index')}}" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-briefcase"></i>
             <div class="text-truncate">Cầm đồ</div>
         </a>
     </li>
     <li class="menu-item">
-        <a href="#" class="menu-link">
+        <a href="{{route('pawns.index')}}" class="menu-link">
             <i class="menu-icon tf-icons bx bx-home-circle"></i>
             <div class="text-truncate">Trả góp</div>
         </a>
@@ -28,7 +28,7 @@
     <!-- Layouts -->
     <li class="menu-item <?= Request::is('customers*') ? 'open' : '' ?>">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
-            <i class="menu-icon tf-icons bx bx-layout"></i>
+            <i class="menu-icon tf-icons bx bx-user"></i>
             <div class="text-truncate">Quản lý khách hàng</div>
         </a>
 
@@ -47,7 +47,7 @@
     ?>
     <li class="menu-item <?= Request::is('asset*') ? 'open' : '' ?>">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
-            <i class="menu-icon tf-icons bx bx-layout"></i>
+            <i class="menu-icon tf-icons bx bx-package"></i>
             <div class="text-truncate">Quản lý tài sản</div>
         </a>
 
@@ -61,7 +61,7 @@
     </li>
     <li class="menu-item <?= Request::is('users*') ? 'open' : '' ?>">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
-            <i class="menu-icon tf-icons bx bx-layout"></i>
+            <i class="menu-icon tf-icons bx bx-group"></i>
             <div class="text-truncate">Quản lý nhân viên</div>
         </a>
 
@@ -73,15 +73,21 @@
             </li>
         </ul>
     </li>
+    <li class="menu-item <?= Request::is('funds*') ? 'active' : '' ?>">
+        <a href="{{route('funds.index')}}" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-layout"></i>
+            <div class="text-truncate">Quản lý quỹ</div>
+        </a>
+    </li>
     <li class="menu-item">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
-            <i class="menu-icon tf-icons bx bx-layout"></i>
+            <i class="menu-icon tf-icons bx bx-money"></i>
             <div class="text-truncate">Quản lý thu chi</div>
         </a>
 
         <ul class="menu-sub">
             <li class="menu-item">
-                <a href="javascript:void(0);" class="menu-link">
+                <a href="{{route('expenses.index')}}" class="menu-link">
                     <div class="text-truncate">Quản lý thu chi</div>
                 </a>
             </li>
@@ -89,7 +95,7 @@
     </li>
     <li class="menu-item">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
-            <i class="menu-icon tf-icons bx bx-layout"></i>
+            <i class="menu-icon tf-icons bx bx-bar-chart"></i>
             <div class="text-truncate">Thống kê</div>
         </a>
 
@@ -103,14 +109,21 @@
     </li>
     <li class="menu-item">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
-            <i class="menu-icon tf-icons bx bx-layout"></i>
-            <div class="text-truncate">Cài đặt</div>
+            <i class="menu-icon tf-icons bx bx-cog"></i>
+            <div class="text-truncate">Hệ thống</div>
         </a>
 
         <ul class="menu-sub">
             <li class="menu-item">
                 <a href="javascript:void(0);" class="menu-link">
                     <div class="text-truncate">Cài đặt</div>
+                </a>
+            </li>
+        </ul>
+        <ul class="menu-sub">
+            <li class="menu-item">
+                <a href="{{route('logs.index')}}" class="menu-link">
+                    <div class="text-truncate">Lịch sử hệ thống</div>
                 </a>
             </li>
         </ul>

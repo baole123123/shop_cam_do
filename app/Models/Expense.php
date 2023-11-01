@@ -5,20 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Logs extends Model
+class Expense extends Model
 {
     use HasFactory;
-    protected $table = 'Logs';
     protected $fillable = [
-        'model_name',
-        'object_id',
-        'action_name',
-        'user_id',
+        'type',
+        'contract_id',
+        'amount',
+        'note',
     ];
 
-    public function user()
+    public function contract()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(Contract::class, 'contract_id');
     }
     public $timestamps = true;
 }

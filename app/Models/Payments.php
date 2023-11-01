@@ -18,4 +18,33 @@ class Payments extends Model
         'user_id',
     ];
     public $timestamps = true;
+
+    const _DONG_LAI = 0;
+    const _DA_DONG = 1;
+
+    public static function getDescStatus($codeStatus)
+    {
+        try {
+            $codeStatus = intval($codeStatus);
+            $result = "Undefined";
+            switch ($codeStatus) {
+                case self::_DEFAULT: {
+                        $result = "Đóng lãi";
+                        break;
+                    }
+                case self::_DA_DONG: {
+                        $result = "Đã đóng";
+                        break;
+                    }
+                default: {
+                        $result = "Undefined";
+                        break;
+                    }
+            }
+
+            return $result;
+        } catch (Exception $ex) {
+            throw $ex;
+        }
+    }
 }

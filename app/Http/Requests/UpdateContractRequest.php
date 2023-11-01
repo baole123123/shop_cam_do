@@ -22,7 +22,35 @@ class UpdateContractRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'customer_name' => 'required',
+            'customer_identi' => 'required|unique:contracts,customer_identi,'.$this->contract.'',
+            'customer_birthday' => 'before:today|required',
+            'total_loan' => 'required|numeric',
+            'interest_payment_period' => 'required|numeric',
+            'interest_rate' => 'required|numeric',
+            'date_paid' => 'required',
+            'customer_phone' => 'required|digits:10|unique:contracts,customer_phone,'.$this->contract.'',
+        ];
+    }
+    public function messages() {
+        return [
+            'customer_name.required' => 'Không được để trống trường này',
+            'customer_name.regex' => 'Tên không hợp lệ',
+            'customer_identi.numeric' => 'Bắt buộc phải nhập số',
+            'customer_identi.required' => 'Không được để trống trường này',
+            'customer_identi.unique' => 'Số CCCD đã tồn tại',
+            'customer_birthday.before' => 'Ngày sinh không hợp lệ',
+            'customer_birthday.required' => 'Không được để trống trường này',
+            'total_loan.required' => 'Không được để trống trường này',
+            'total_loan.numeric' => 'Bắt buộc phải nhập số',
+            'interest_payment_period.required' => 'Không được để trống trường này',
+            'interest_payment_period.numeric' => 'Bắt buộc phải nhập số',
+            'interest_rate.required' => 'Không được để trống trường này',
+            'interest_rate.numeric' => 'Bắt buộc phải nhập số',
+            'date_paid.required' => 'Không được để trống trường này',
+            'customer_phone.required' => 'Không được để trống trường này',
+            'customer_phone.digits' => 'Số điện thoại không hợp lệ',
+            'customer_phone.unique' => 'Số điện thoại đã tồn tại',
         ];
     }
 }

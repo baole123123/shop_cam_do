@@ -16,8 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('customer_id');
             $table->foreign('customer_id')->references('id')->on('customers');
             $table->string('customer_name')->nullable();
-            $table->string('identi')->nullable();
-            $table->string('birthday')->nullable();
+            $table->string('customer_identi')->nullable();
+            $table->string('customer_birthday')->nullable();
             $table->string('customer_image')->nullable();
             $table->string('contract_type_id')->default(0);
             $table->unsignedBigInteger('asset_id');
