@@ -10,7 +10,7 @@ class LogController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Logs::select('*');
+        $query = Log::select('*');
         $limit = $request->limit ? $request->limit : 10;
         if ($request->model_name) {
             $query->where('model_name', 'LIKE', "%$request->model_name%");

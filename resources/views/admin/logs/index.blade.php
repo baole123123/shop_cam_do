@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 @section('content')
 <h4 class="py-3 mb-4">
-    <span class="text-muted fw-light">Trang chủ /</span> Lịch sử
+    <span class="text-muted fw-light">Trang chủ /</span> Lịch sử hệ thống
 </h4>
 
 <!-- Product List Table -->
@@ -13,58 +13,24 @@
         <div class="card-header">
             <div class="row">
                 <div class="col">
-                    <input type="text" name="model_name" value="{{ request()->model_name }}" class="form-control"
-                        placeholder="Tên...">
+                    <select name="user_id" class="form-select text-capitalize">
+                        <option value="">Tất cả</option>
+                        @foreach($users as $user)
+                            <option value="{{ $user->id }}" @selected(request()->user_id == $user->id) >{{ $user->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="col">
-                    <input type="text" name="object_id" value="{{ request()->object_id }}" class="form-control"
-                        placeholder="Đối tượng">
+                    <select id="limit" name="limit" class="form-select text-capitalize">
+                        <option @selected(request()->limit == 10) value="10">10</option>
+                        <option @selected(request()->limit == 20) value="20">20</option>
+                        <option @selected(request()->limit == 30) value="30">30</option>
+                    </select>
                 </div>
-                <div class="col">
-                    <input type="text" name="action_name" value="{{ request()->action_name }}" class="form-control"
-                        placeholder="Tên hành động">
-                </div>
-
                 <div class="col-md-1">
                     <button class="btn btn-primary">
                         <i class="bx bx-search"></i>
                     </button>
-                </div>
-            </div>
-        </div>
-        <div class="card-header border-top">
-            <div class="row">
-            <div class="col">
-                <select name="user_id" class="form-select text-capitalize">
-                    <option value="">Tất cả</option>
-                    @foreach($users as $user)
-                        <option value="{{ $user->id }}" {{ request()->user_id == $user->id ? 'selected' : '' }}>{{ $user->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="col">
-                            <select id="limit" name="limit" class="form-select text-capitalize">
-                                <option value="10">10</option>
-                                <option value="20">20</option>
-                                <option value="30">30</option>
-                            </select>
-                        </div>
-                        <div class="col">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-label-secondary dropdown-toggle"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="bx bx-export me-1"></i> Export
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a class="dropdown-item disabled" href="#">Export</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -77,20 +43,18 @@
                 <thead>
                     <tr>
                         <th>STT</th>
-                        <th>Tên</th>
-                        <th>Đối tượng</th>
-                        <th>Tên hành động</th>
                         <th>Tên nhân viên</th>
+                        <th>Nội dung</th>
+                        <th>Ngày</th>
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
                     @foreach($items as $index => $item)
                     <tr>
                         <td>{{ $index + 1 }}</td>
-                        <td>{{ $item->model_name }}</td>
-                        <td>{{ $item->object_id }}</td>
-                        <td>{{ $item->action_name }}</td>
                         <td>{{ $item->user->name }}</td>
+                        <td>{{ $item->description }}</td>
+                        <td>{{ $item->created_at }}</td>
                     </tr>
                     @endforeach
                 </tbody>
